@@ -1,3 +1,20 @@
+// import Echo from "laravel-echo";
+// import Pusher from "pusher-js";
+
+// window.Pusher = Pusher;
+
+// window.Echo = new Echo({
+//     broadcaster: "reverb",
+//     key: import.meta.env.VITE_REVERB_APP_KEY,
+//     wsHost: window.location.hostname,
+//     wsPort: 8080,
+//     forceTLS: false,
+//     enabledTransports: ["ws"],
+// });
+
+
+
+
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
 
@@ -5,9 +22,15 @@ window.Pusher = Pusher;
 
 window.Echo = new Echo({
     broadcaster: "reverb",
+
     key: import.meta.env.VITE_REVERB_APP_KEY,
-    wsHost: window.location.hostname,
-    wsPort: 8080,
-    forceTLS: false,
-    enabledTransports: ["ws"],
+
+    wsHost: import.meta.env.VITE_REVERB_HOST,
+    wsPort: import.meta.env.VITE_REVERB_PORT,
+
+    wssPort: import.meta.env.VITE_REVERB_PORT,
+
+    forceTLS: import.meta.env.VITE_REVERB_SCHEME === "https",
+
+    enabledTransports: ["ws", "wss"],
 });
