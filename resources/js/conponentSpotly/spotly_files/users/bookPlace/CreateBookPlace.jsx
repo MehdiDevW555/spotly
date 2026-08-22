@@ -122,9 +122,25 @@ function CreateBookPlace(props) {
     }
 
 
-    let sendBookPlace = () => {
-        API_SEND_BOOK_PLACE(dispatch, uuid, full_name, phone, ServiceId, tUEFF,fcmToken)
+   let sendBookPlace = () => {
+
+    console.log("🔥 FCM TOKEN:", fcmToken);
+
+    if (!fcmToken) {
+        console.log("❌ FCM TOKEN NOT READY");
+        return;
     }
+
+    API_SEND_BOOK_PLACE(
+        dispatch,
+        uuid,
+        full_name,
+        phone,
+        ServiceId,
+        tUEFF,
+        fcmToken
+    );
+};
 
 
     return (

@@ -143,8 +143,7 @@ function Users() {
                 const currentToken = await getToken(
                     messaging,
                     {
-                        vapidKey:
-                            "BMrlXhCM4FvgLg4dhS1qIRdWG_-0dzrH4p6goE2Gm5vOKP_TwkWVFmjsv2G-Bts2Jny0NBf0OHMd6OY6MTeLLUw",
+                        vapidKey:"BMrlXhCM4FvgLg4dhS1qIRdWG_-0dzrH4p6goE2Gm5vOKP_TwkWVFmjsv2G-Bts2Jny0NBf0OHMd6OY6MTeLLUw",
 
                         serviceWorkerRegistration:
                             registration,

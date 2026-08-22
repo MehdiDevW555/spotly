@@ -59,7 +59,7 @@ Route::post('/api/web/getPlans', [App\Http\Controllers\api\shopAdmin\subscriptio
 
 
 Route::middleware(['auth:ShopAdmin'])->group(function () {
-    Route::get('/shopAdmin/logout', [App\Http\Controllers\Auth\shopAdmin\AuthShopAdminController::class, 'logout']);
+    Route::get('/shopAdmin/logout', [App\Http\Controllers\auth\shopAdmin\AuthShopAdminController::class, 'logout']);
 
     Route::get('/shopAdmin', function () {
         return view('shopAdmin');
@@ -87,8 +87,8 @@ Route::post('/api/web/sendBookPlace', [App\Http\Controllers\api\users\API_RECEIV
 
 Route::post('/api/web/recallUser', [App\Http\Controllers\api\shopAdmin\queue\API_RECALL_USER::class, "recallUser"]);
 
-Route::post('/shopAdmin/login', [App\Http\Controllers\Auth\shopAdmin\AuthShopAdminController::class, 'check'])->name('login_shopAdmin');
-Route::get('/shopAdmin/login', [App\Http\Controllers\Auth\shopAdmin\AuthShopAdminController::class, 'index'])->name('shopAdmin_login');
+Route::post('/shopAdmin/login', [App\Http\Controllers\auth\shopAdmin\AuthShopAdminController::class, 'check'])->name('login_shopAdmin');
+Route::get('/shopAdmin/login', [App\Http\Controllers\auth\shopAdmin\AuthShopAdminController::class, 'index'])->name('shopAdmin_login');
 
 
 
