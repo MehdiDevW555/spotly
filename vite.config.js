@@ -77,36 +77,36 @@ export default defineConfig({
 
         react(),
 
-        VitePWA({
-            registerType: 'autoUpdate',
+     VitePWA({
+    registerType: 'autoUpdate',
 
-            manifest: {
-                name: 'Spotly',
-                short_name: 'Spotly',
-                description: 'Smart Queue Management System',
+    manifest: {
+        name: 'Spotlly',
+        short_name: 'Spotlly',
+        description: 'Spotlly هو نظام ذكي لإدارة الطوابير والحجوزات وتنظيم انتظار الزبائن بسهولة.',
 
-                theme_color: '#3989EC',
-                background_color: '#ffffff',
+        theme_color: '#3989EC',
+        background_color: '#ffffff',
 
-                display: 'standalone',
+        display: 'standalone',
 
-                start_url: '/',
-                scope: '/',
+        start_url: '/',
+        scope: '/',
 
-               icons: [
-    {
-        src: '/icons/pwa-192x192.png',
-        sizes: '192x192',
-        type: 'image/png',
-    },
-    {
-        src: '/icons/pwa-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
-    },
-],
+        icons: [
+            {
+                src: '/icons/pwa-192x192.png',
+                sizes: '192x192',
+                type: 'image/png',
             },
-        }),
+            {
+                src: '/icons/pwa-512x512.png',
+                sizes: '512x512',
+                type: 'image/png',
+            },
+        ],
+    },
+}),
     ],
 
     // server: {

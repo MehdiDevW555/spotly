@@ -32,7 +32,7 @@ function AvailableQrCode(props) {
     //     : null;
 
     let qrUrl = uuid
-    ? `${import.meta.env.VITE_APP_URL}/q/${uuid}`
+    ? `https://spotlly.com/q/${uuid}`
     : null;
 
     console.log(import.meta.env.VITE_APP_URL);

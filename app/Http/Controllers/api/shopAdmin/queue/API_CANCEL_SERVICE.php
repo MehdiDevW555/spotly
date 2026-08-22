@@ -74,6 +74,7 @@ class API_CANCEL_SERVICE extends Controller
                     'ticket_uuid' => (string) $ticket->ticket_uuid,
                     'ticket_number' => (string) $ticket->ticket_number,
                     'status' => 'cancelled',
+                    'url' => 'https://spotlly.com/q/' . \Illuminate\Support\Facades\DB::connection('spotly')->table('shops')->where('id', $ticket->shop_id)->value('uuid'),
                 ]
             );
         }

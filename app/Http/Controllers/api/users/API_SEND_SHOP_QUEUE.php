@@ -29,6 +29,7 @@ class API_SEND_SHOP_QUEUE extends Controller
         ])
             ->where('shop_id', $shop->id)
             ->whereDate('created_at', today())
+            ->where('status', '!=', 'cancelled')
             ->latest('ticket_number')
             ->first();
 

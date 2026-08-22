@@ -78,6 +78,7 @@ class FCMNotification
         'body' => $body,
         'icon' => $icon ?? 'https://spotlly.com/images/slogo.png',
         'timestamp' => now()->toIso8601String(),
+        'url' => $data['url'] ?? '',
     ]))
     ->withAndroidConfig([
         'priority' => 'high',

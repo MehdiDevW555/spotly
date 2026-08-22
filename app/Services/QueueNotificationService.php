@@ -112,6 +112,7 @@ class QueueNotificationService
                     'status' => 'near_turn',
                     'people_before' => (string) $peopleBefore,
                     'shop_id' => (string) $ticket->shop_id,
+                     'url' => 'https://spotlly.com/q/' . DB::connection('spotly')->table('shops')->where('id', $ticket->shop_id)->value('uuid'),
                 ];
 
                 // إرسال الإشعار
