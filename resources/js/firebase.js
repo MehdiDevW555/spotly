@@ -75,7 +75,7 @@ import {
 } from "firebase/messaging";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAUjyNbF__Ki6QVympviFP9MEddgZxGZIQ",
+    apiKey: "AIzaSyAUjyNbF__Ki6QVYmpviFP9MEddgZxGZIQ",
     authDomain: "spotlly.firebaseapp.com",
     projectId: "spotlly",
     storageBucket: "spotlly.firebasestorage.app",
