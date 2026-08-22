@@ -7,13 +7,19 @@ import {
 import API_TICKET_STATUS from './API_TICKET_STATUS'
 
 
-function API_SEND_BOOK_PLACE(dispatch, uuid, full_name, phone, serviceId, tUEFF) {
+function API_SEND_BOOK_PLACE(dispatch, uuid, full_name, phone, serviceId, tUEFF,fcmToken) {
     dispatch(changeBookPlace({ loading: 0 }))
-    axios.post('/api/web/sendBookPlace', { uuid, full_name, phone, serviceId })
+    axios.post('/api/web/sendBookPlace', { uuid, full_name, phone, serviceId, fcm_token: fcmToken,})
         .then((data_r) => {
             localStorage.setItem(
                 `ticket_uuid_${uuid}`,
                 data_r.data.ticket_uuid
+            )
+
+
+            localStorage.setItem(
+                `ticket_id_${uuid}`,
+                data_r.data.ticket_id
             )
 
             window.location.reload();

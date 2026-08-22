@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Dashboard from './dashboard/Dashboard'
 import Services from './services/Services'
 
-import { createService_selector, currentPage_selector, getAllTicket_selector, getQueueStatus_selector, getService_selector, infoShop_selector, pagesDashboard_selector, pagesServices_selector, pagesShopSetup_selector, toggleChangeStatusService_selector, toggleDialogCreateTicket_selector, toggleUpdateQueueStatus_selector } from '../../../../redux/selectors/shopAdmin/ShopAdmin_selector'
+import { createService_selector, currentPage_selector, getAllTicket_selector, getQueueStatus_selector, getService_selector, getSubscription_selector, infoShop_selector, pagesDashboard_selector, pagesServices_selector, pagesShopSetup_selector, toggleChangeStatusService_selector, toggleDialogCreateTicket_selector, toggleUpdateQueueStatus_selector } from '../../../../redux/selectors/shopAdmin/ShopAdmin_selector'
 import { Box, CircularProgress, Typography } from '@mui/material'
 import EmptyServices from './services/emptyServices/EmptyServices'
 import CreateService from './services/createService/CreateService'
@@ -21,9 +21,13 @@ import { ChangeToggleDialogCreateTicket } from '../../../../redux/slices/shopAdm
 import CreateTicket from '../../../dialog/shopAdmin/mainContent/queues/CreateTicket'
 import API_GET_QUEUE_STATUS from '../../../api/shopAdmin/queue/API_GET_QUEUE_STATUS'
 
-function MainContent() {
+function MainContent(props) {
+    let {maxServices }=props
     let dispatch = useDispatch()
     let toggleDialogCreateTicket = useSelector(toggleDialogCreateTicket_selector)
+
+    let getSubscription = useSelector(getSubscription_selector)
+    let maxServicesToThisPlan = getSubscription?.subscription?.plan?.max_services
 
     let createService = useSelector(createService_selector)
     let TUEFF = createService?.TUEFF
@@ -37,6 +41,7 @@ function MainContent() {
 
     let getServices = useSelector(getService_selector)
     let LoadingD = getServices?.loading
+    let services = getServices?.services
 
     const currentPage = useSelector(currentPage_selector)
     let toggleChangeStatusService = useSelector(toggleChangeStatusService_selector)
@@ -89,8 +94,8 @@ let toggleUpdateQueueStatus = useSelector(toggleUpdateQueueStatus_selector)
             {toggleDialogCreateTicket && <CreateTicket dispatch={dispatch} openDialogCreateTicket={openDialogCreateTicket} />}
 
 
-            {currentPage === "Dashboard" && <Dashboard />}
-            {currentPage === "Queues" && <Queues idShop={idShop} openDialogCreateTicket={openDialogCreateTicket} />}
+            {currentPage === "Dashboard" && <Dashboard  />}
+            {currentPage === "Queues" && <Queues services={services} maxServices={maxServices} getSubscription={getSubscription} idShop={idShop} openDialogCreateTicket={openDialogCreateTicket} />}
 
             {/* </Box> */}
             {/* {currentPage === "EmptyServices" && <Services />} */}
@@ -102,7 +107,7 @@ let toggleUpdateQueueStatus = useSelector(toggleUpdateQueueStatus_selector)
                 LoadingD === 1 ? (
                     <Loading />
                 ) : (
-                    <Services currentPage={currentPage} idShop={idShop} />
+                    <Services maxServices={maxServices} currentPage={currentPage} idShop={idShop} />
                 )
             )}
 

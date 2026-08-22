@@ -67,7 +67,7 @@ function Title(props) {
                     alt="Logo"
                     sx={{
                         width: 140,
-                        height: 55,
+                        height: 65,
                     }}
                 />
                 {toggleMenu && (
@@ -85,11 +85,12 @@ function Title(props) {
                     </IconButton>
                 )}
             </Box>
-            <Typography variant="body2" color="text.secondary" mb={3} sx={{ mr: 1 }}>
-                Spotly.abd-tech.ca
+            <Typography onClick={()=>{window.location.href="/"}} variant="body2" color="text.secondary" mb={3} sx={{ mr: 1 }}>
+                Spotlly.com
             </Typography>
         </Box>
     );
 }
 
 export default Title;
+// favicon

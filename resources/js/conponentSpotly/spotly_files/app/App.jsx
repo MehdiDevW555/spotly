@@ -51,6 +51,7 @@ import Step4 from "../../../../img/app/step4.png"
 import Step5 from "../../../../img/app/step5.png"
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
+import OfferDialog from "../../dialog/app/offerDialog/OfferDialog";
 
 
 function App() {
@@ -65,10 +66,11 @@ function App() {
             }}
         >
             {/* Navbar */}
+            <OfferDialog />
 
 
 
-            <Header/>
+            <Header />
             {/* ---------------------------------------------------------- */}
 
 
@@ -102,12 +104,12 @@ function App() {
                             backgroundSize: "caver",
                             backgroundPosition: "center center",
                             backgroundRepeat: "no-repeat",
-                            opacity: 0.6,
+                            opacity: 0.17,
                             // border:1,
                         }}
                     />
 
-                    {/* <Box
+                    {/* <Box  offer-first-20-customers
                         sx={{
                             position: "absolute",
                             inset: 0,
@@ -232,7 +234,7 @@ function App() {
                                 maxWidth: 700,
                             }}
                         >
-                            Spotly يحول طوابير الانتظار التقليدية إلى
+                            Spotlly يحول طوابير الانتظار التقليدية إلى
                             تجربة رقمية ذكية. دع عملاءك يحجزون دورهم،
                             يتابعون ترتيبهم، ويصلون في الوقت المناسب
                             بدون انتظار طويل.
@@ -251,7 +253,7 @@ function App() {
                         >
 
                             <Button
-                            onClick={()=>{window.location.href='/shopAdmin/register'}}
+                                onClick={() => { window.location.href = '/shopAdmin/register' }}
                                 sx={{
                                     width: { xs: '100%', md: '50%' },
                                     px: 4,
@@ -868,7 +870,7 @@ function App() {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                mb: { xs: 2, sm: 2, md: 3 },
+                                mb: { xs: 1.5, sm: 2, md: 3 },
                                 bgcolor: "rgba(239,68,68,.12)",
                                 border: "1px solid rgba(239,68,68,.25)",
                                 boxShadow:
@@ -888,7 +890,7 @@ function App() {
                                 color: "#fff",
                                 fontSize: { xs: 24, sm: 18, md: 24 },
                                 fontWeight: 800,
-                                mb: 2,
+                                mb: { xs: 1, sm: 2 },
                             }}
                         >
                             وقت ضائع
@@ -930,7 +932,7 @@ function App() {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                mb: { xs: 2, md: 3 },
+                                mb: { xs: 1.5, sm: 2, md: 3 },
                                 bgcolor: "rgba(59,130,246,.12)",
                                 border: "1px solid rgba(59,130,246,.25)",
                                 boxShadow:
@@ -950,7 +952,7 @@ function App() {
                                 color: "#fff",
                                 fontSize: { xs: 24, sm: 18, md: 24 },
                                 fontWeight: 800,
-                                mb: 2,
+                                mb: { xs: 1, sm: 2 },
                             }}
                         >
                             ازدحام داخل المحل
@@ -992,7 +994,7 @@ function App() {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                mb: { xs: 2, md: 3 },
+                                mb: { xs: 1.5, sm: 2, md: 3 },
                                 bgcolor: "rgba(168,85,247,.12)",
                                 border: "1px solid rgba(168,85,247,.25)",
                                 boxShadow:
@@ -1012,7 +1014,7 @@ function App() {
                                 color: "#fff",
                                 fontSize: { xs: 24, sm: 18, md: 24 },
                                 fontWeight: 800,
-                                mb: 2,
+                                mb: { xs: 1, sm: 2 },
                             }}
                         >
                             تجربة سيئة
@@ -1086,7 +1088,7 @@ function App() {
                                     mb: 2,
                                 }}
                             >
-                                مع Spotly تصبح إدارة الانتظار أسهل
+                                مع Spotlly تصبح إدارة الانتظار أسهل
                             </Typography>
 
                             <Typography
@@ -1197,7 +1199,7 @@ function App() {
                                     justifyContent: "center",
                                     bgcolor: "rgba(255,255,255,.05)",
                                     border: "1px solid rgba(255,255,255,.08)",
-                                    mb: 3,
+                                    mb: { xs: 2, sm: 3 },
                                     position: "relative",
                                 }}
                             >
@@ -1214,7 +1216,7 @@ function App() {
                                     color: "#fff",
                                     fontWeight: 800,
                                     fontSize: 22,
-                                    mb: 1.5,
+                                    mb: { xs: 1, sm: 1.5 },
                                 }}
                             >
                                 حجز الدور عبر QR Code
@@ -1271,7 +1273,7 @@ function App() {
                                     justifyContent: "center",
                                     bgcolor: "rgba(255,255,255,.05)",
                                     border: "1px solid rgba(255,255,255,.08)",
-                                    mb: 3,
+                                    mb: { xs: 2, sm: 3 },
                                 }}
                             >
                                 <UpdateIcon
@@ -1287,7 +1289,7 @@ function App() {
                                     color: "#fff",
                                     fontWeight: 800,
                                     fontSize: 22,
-                                    mb: 1.5,
+                                    mb: { xs: 1, sm: 1.5 },
                                 }}
                             >
                                 متابعة الدور مباشرة
@@ -1344,7 +1346,7 @@ function App() {
                                     justifyContent: "center",
                                     bgcolor: "rgba(255,255,255,.05)",
                                     border: "1px solid rgba(255,255,255,.08)",
-                                    mb: 3,
+                                    mb: { xs: 2, sm: 3 },
                                 }}
                             >
                                 <NotificationsActiveIcon
@@ -1360,7 +1362,7 @@ function App() {
                                     color: "#fff",
                                     fontWeight: 800,
                                     fontSize: 22,
-                                    mb: 1.5,
+                                    mb: { xs: 1, sm: 1.5 },
                                 }}
                             >
                                 إشعارات ذكية
@@ -1417,7 +1419,7 @@ function App() {
                                     justifyContent: "center",
                                     bgcolor: "rgba(255,255,255,.05)",
                                     border: "1px solid rgba(255,255,255,.08)",
-                                    mb: 3,
+                                    mb: { xs: 2, sm: 3 },
                                 }}
                             >
                                 <SpaceDashboardIcon
@@ -1433,7 +1435,7 @@ function App() {
                                     color: "#fff",
                                     fontWeight: 800,
                                     fontSize: 22,
-                                    mb: 1.5,
+                                    mb: { xs: 1, sm: 1.5 },
                                 }}
                             >
                                 لوحة تحكم متطورة
@@ -1455,7 +1457,6 @@ function App() {
                 </Box>
 
             </Box>
-
 
 
 
@@ -1608,7 +1609,7 @@ function App() {
                                         src={Step1}
                                         sx={{
                                             // border:2,
-                                            mt:{xs:-4,sm:-4},
+                                            mt: { xs: -4, sm: -4 },
                                             width: "100%",
                                             height: "100%",
                                             objectFit: "contain",
@@ -1699,7 +1700,7 @@ function App() {
                                         component="img"
                                         src={Step2}
                                         sx={{
-                                             mt:{xs:-4,sm:-4},
+                                            mt: { xs: -4, sm: -4 },
                                             width: "100%",
                                             height: "100%",
                                             objectFit: "contain",
@@ -1785,7 +1786,7 @@ function App() {
                                         component="img"
                                         src={Step3}
                                         sx={{
-                                             mt:{xs:-4,sm:-4},
+                                            mt: { xs: -4, sm: -4 },
                                             width: "100%",
                                             height: "100%",
                                             objectFit: "contain",
@@ -1868,9 +1869,9 @@ function App() {
                                     <Box
                                         component="img"
                                         // src="https://lh3.googleusercontent.com/aida/AP1WRLsYgcrp09uZWb25I6f926f519k7nW6uSubVf-02T2Suza_FP3_94WybtpVI5LpbtW5yYWsVvM3sXlkjcJafmuaVnkwlSRqWabpR6K4oVj-c8DMJI1B87ROuvsw1WIIEYve_30aci8cLGxoQSl7hnZhRSLDM_3sWMgH9rZbAZCOir85Hz6OlIpAZNDxnc2z3oHtoD-EfRsjAQoEUYsDTVFJB_iIv4p3_0AQxBcnaYpeDQ8sxCPE50fGhoZk"
-                                        src={Step1}
+                                        src={Step4}
                                         sx={{
-                                             mt:{xs:-4,sm:-4},
+                                            mt: { xs: -4, sm: -4 },
                                             width: "100%",
                                             height: "100%",
                                             objectFit: "contain",
@@ -1927,7 +1928,7 @@ function App() {
                                 color: "#635bff",
                             }}
                         >
-                            Spotly
+                            Spotlly
                         </Box>{" "}
                         محرك نمو لعملك.
                     </Typography>
@@ -2237,7 +2238,7 @@ function App() {
                                             fontWeight: 800,
                                         }}
                                     >
-                                        $49
+                                        5000 دج
                                     </Typography>
 
                                     <Typography
@@ -2267,23 +2268,39 @@ function App() {
                                     </Typography>
                                 </Box>
 
+
                                 <Box sx={{ display: "flex", gap: 1 }}>
                                     <CheckCircleIcon sx={{ color: "#635bff" }} />
                                     <Typography color="#c7c4d8">
-                                        حجز QR غير محدود
+                                        8 خدمات
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ display: "flex", gap: 1 }}>
+                                    <CheckCircleIcon sx={{ color: "#635bff" }} />
+                                    <Typography color="#c7c4d8">
+                                        99 تذكرة يومياً
                                     </Typography>
                                 </Box>
 
                                 <Box sx={{ display: "flex", gap: 1 }}>
                                     <CheckCircleIcon sx={{ color: "#635bff" }} />
                                     <Typography color="#c7c4d8">
-                                        تقارير أداء أساسية
+                                        QR Code
                                     </Typography>
                                 </Box>
+
+
                             </Box>
 
                             <Button
                                 fullWidth
+                                // onClick={() => { window.location.href = '/shopAdmin/register' }}
+                                 onClick={() => {
+                                    window.open(
+                                        "https://wa.me/213782448880",
+                                        "_blank"
+                                    );
+                                }}
                                 sx={{
                                     py: 1.8,
                                     borderRadius: "14px",
@@ -2361,7 +2378,7 @@ function App() {
                                             fontWeight: 800,
                                         }}
                                     >
-                                        $99
+                                        10000 دج
                                     </Typography>
 
                                     <Typography
@@ -2370,7 +2387,7 @@ function App() {
                                             fontSize: ".9rem",
                                         }}
                                     >
-                                        /شهرياً
+                                        /3 اشهر
                                     </Typography>
                                 </Box>
                             </Box>
@@ -2386,20 +2403,20 @@ function App() {
                             >
                                 <Box sx={{ display: "flex", gap: 1 }}>
                                     <CheckCircleIcon sx={{ color: "#635bff" }} />
-                                    <Typography>حتى 5 فروع</Typography>
+                                    <Typography>حتى 3 فروع</Typography>
                                 </Box>
 
                                 <Box sx={{ display: "flex", gap: 1 }}>
                                     <CheckCircleIcon sx={{ color: "#635bff" }} />
                                     <Typography>
-                                        إشعارات واتساب وSMS
+                                       20 خدمات
                                     </Typography>
                                 </Box>
 
                                 <Box sx={{ display: "flex", gap: 1 }}>
                                     <CheckCircleIcon sx={{ color: "#635bff" }} />
                                     <Typography>
-                                        تحليلات متقدمة وذكية
+                                       300 تذكرة يومياً
                                     </Typography>
                                 </Box>
 
@@ -2412,6 +2429,13 @@ function App() {
                             </Box>
 
                             <Button
+                                // onClick={() => { window.location.href = '/shopAdmin/register' }}
+                                 onClick={() => {
+                                    window.open(
+                                        "https://wa.me/213782448880",
+                                        "_blank"
+                                    );
+                                }}
                                 fullWidth
                                 sx={{
                                     py: 1.8,
@@ -2505,6 +2529,7 @@ function App() {
                             </Box>
 
                             <Button
+                            //    disabled
                                 fullWidth
                                 sx={{
                                     py: 1.8,
@@ -2514,7 +2539,7 @@ function App() {
                                     fontWeight: 700,
                                 }}
                             >
-                                تواصل معنا
+                               غير متاح الان
                             </Button>
                         </Box>
                     </Box>
@@ -2746,11 +2771,18 @@ function App() {
                             xs: 3,
                             md: 10,
                         },
-                        borderRadius: "40px",
+                        borderRadius: { xs: '30px', md: '40px' },
                         border: "1px solid rgba(255,255,255,.08)",
                         background:
                             "linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,.01))",
+
+                        background:
+                            "linear-gradient(135deg, rgba(103,58,183,.25), rgba(76,29,149,.15), rgba(15,23,42,.4))",
+
+
                         backdropFilter: "blur(20px)",
+
+                        border: "1px solid rgba(157,78,221,.15)",
                         boxShadow: "0 20px 60px rgba(0,0,0,.3)",
                     }}
                 >
@@ -2816,7 +2848,7 @@ function App() {
                         }}
                     >
                         <Button
-                         onClick={()=>{window.location.href='/shopAdmin/register'}}
+                            onClick={() => { window.location.href = '/shopAdmin/register' }}
                             sx={{
                                 px: 6,
                                 py: 2,
@@ -2836,6 +2868,18 @@ function App() {
                         </Button>
 
                         <Button
+                            // onClick={() => {
+                            //     window.open(
+                            //         "https://m.me/spotlly",
+                            //         "_blank"
+                            //     );
+                            // }}
+                             onClick={() => {
+                                    window.open(
+                                        "https://wa.me/213782448880",
+                                        "_blank"
+                                    );
+                                }}
                             sx={{
                                 px: 6,
                                 py: 2,
@@ -2871,7 +2915,7 @@ function App() {
                 </Box>
             </Box>
 
-<Footer/>
+            <Footer />
 
 
 

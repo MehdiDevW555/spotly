@@ -39,6 +39,9 @@ const progressPercentage =
     (elapsedDays / totalDays) * 100;
 
 
+
+
+
     return (
         <Box
             sx={{
@@ -187,7 +190,7 @@ const progressPercentage =
                                     fontWeight: 600,
                                 }}
                             >
-                                {subscription?.plan?.type == 'trial' ? ' فترة تجريبية' : 'مدفوعة'}
+                                {subscription?.plan?.type == 'trial' ? 'مجانية' : 'مدفوعة'}
 
                             </Typography>
 
@@ -320,7 +323,8 @@ const progressPercentage =
 
 
                     {/* Alert */}
-                    <Box
+
+                  { remainingDays <= 6 && <Box
                         sx={{
                             display: "flex",
 
@@ -338,27 +342,28 @@ const progressPercentage =
                             borderRadius: "12px",
 
                             borderRight:
-                                "4px solid #FFB800",
+                                "4px solid #ff0000",
                         }}
                     >
 
                         <WarningAmberRoundedIcon
                             sx={{
-                                color: "#FFB800"
+                                color: "#ff0000",
+                                fontSize:32,
                             }}
                         />
 
 
                         <Typography
                             sx={{
-                                color: "#333",
+                                color: "#ff0000",
                             }}
                         >
                             {subscription?.plan?.alert}
                         </Typography>
 
 
-                    </Box>
+                    </Box>}
 
 
                 </Box>

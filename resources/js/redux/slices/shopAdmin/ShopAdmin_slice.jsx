@@ -26,6 +26,7 @@ const ShopAdmin = createSlice({
             startService: {loading: 0,message: '',TUEFF:true},
             completeService : {loading:0,message:'',TUEFF:true},
             cancelService:{loading:0,message:'',TUEFF:true},
+            recallUser:{loading:0,message:''},
             toggleChangeStatusService :false,
             getSubscription:{subscription:{},loading:null},
             getQueueStatus:{queueStatus:null,loading:null},
@@ -89,6 +90,9 @@ const ShopAdmin = createSlice({
         changeCancelService:(state,action)=>{
             state.mainContent.cancelService = { ...state.mainContent.cancelService , ...action.payload}
         },
+        changeRecallUser:(state,action)=>{
+            state.mainContent.recallUser = { ...state.mainContent.recallUser , ...action.payload}
+        },
          changeGetSubscription:(state,action)=>{
             state.mainContent.getSubscription = { ...state.mainContent.getSubscription , ...action.payload}
         },
@@ -111,6 +115,6 @@ export const {ChangeToggleMenu,changeOpenFeb, ChangeDataRegisterShopAdmin, Chang
      ChangeCurrentPage, ChangePreviousPage, ChangePagesServices, ChangePagesDashboard,
       ChangePagesShopSetup, ChangeInfoShop,ChangeShop,changeCreateService,changeGetService,
     changeGetAllTicket,changeGetCurrentTicket,changeStartService,changeCompleteService,
-    changeToggleChangeStatusService,changeCancelService,changeGetSubscription,changeDataQueueStatus,
-    changeGetQueueStatus,changeToggleUpdateQueueStatus } = ShopAdmin.actions;
+    changeToggleChangeStatusService,changeCancelService,changeRecallUser,changeGetSubscription,
+    changeDataQueueStatus,changeGetQueueStatus,changeToggleUpdateQueueStatus } = ShopAdmin.actions;
 export default ShopAdmin.reducer;

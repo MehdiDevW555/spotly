@@ -12,6 +12,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 function Footer() {
     return (
@@ -21,10 +22,12 @@ function Footer() {
                 width: "100%",
                 bgcolor: "rgba(10, 10, 15, 0.85)",
                 backdropFilter: "blur(24px)",
-                borderTop: "1px solid rgba(255,255,255,.05)",
-                mt:5,
-                py: 6,
+                borderTop: "2px solid rgb(153, 0, 255)",
+                mt: 8,
+                py: { xs: 8, sm: 6 },
                 position: "relative",
+                borderRadius: '50px 50px 0px 0px',
+
                 zIndex: 10,
             }}
         >
@@ -37,7 +40,7 @@ function Footer() {
                         flexDirection: "column",
                         alignItems: "center",
                         textAlign: "center",
-                        mb: 5,
+                        mb: { xs: 5, sm: 5 },
                     }}
                 >
                     <Box
@@ -45,7 +48,7 @@ function Footer() {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            gap: 2.5,
+                            gap: { xs: 1.5, sm: 2.5 },
                         }}
                     >
 
@@ -62,7 +65,8 @@ function Footer() {
                                 src="/images/spotlyLogo.png"
                                 alt="Spotly Logo"
                                 sx={{
-                                    height: {xs:50,md:70},
+                                    mt: { xs: -1.5, md: 0 },
+                                    height: { xs: 70, md: 80 },
                                     width: "auto",
                                     objectFit: "contain",
                                 }}
@@ -76,7 +80,7 @@ function Footer() {
                             sx={{
                                 maxWidth: 380,
                                 color: "rgba(255,255,255,.55)",
-                                fontSize: {xs:14,sm:18},
+                                fontSize: { xs: 16, sm: 18 },
                                 lineHeight: 1.8,
                             }}
                         >
@@ -94,7 +98,7 @@ function Footer() {
                         >
 
                             {/* X */}
-                            <IconButton
+                            {/* <IconButton
                                 aria-label="X"
                                 sx={{
                                     width: 40,
@@ -118,10 +122,10 @@ function Footer() {
                                 }}
                             >
                                 <XIcon fontSize="small" />
-                            </IconButton>
+                            </IconButton> */}
 
                             {/* LinkedIn */}
-                            <IconButton
+                            {/* <IconButton
                                 aria-label="LinkedIn"
                                 sx={{
                                     width: 40,
@@ -145,11 +149,47 @@ function Footer() {
                                 }}
                             >
                                 <LinkedInIcon fontSize="small" />
+                            </IconButton> */}
+
+                            {/* WhatsApp */}
+                            <IconButton
+                                aria-label="WhatsApp"
+                                onClick={() => {
+                                    window.open(
+                                        "https://wa.me/213782448880",
+                                        "_blank"
+                                    );
+                                }}
+                                sx={{
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: "50%",
+                                    bgcolor: "rgba(255,255,255,.02)",
+                                    border: "1px solid rgba(255,255,255,.1)",
+                                    color: "rgba(255,255,255,.55)",
+                                    transition: ".3s",
+
+                                    "&:hover": {
+                                        color: "#25D366",
+                                        bgcolor: "rgba(37,211,102,.1)",
+                                        borderColor: "rgba(37,211,102,.3)",
+                                        transform: "translateY(-3px)",
+                                    },
+                                }}
+                            >
+                                <WhatsAppIcon fontSize="small" />
                             </IconButton>
+
 
                             {/* Instagram */}
                             <IconButton
                                 aria-label="Instagram"
+                                onClick={() => {
+                                    window.open(
+                                        "https://www.instagram.com/spotllyapp",
+                                        "_blank"
+                                    );
+                                }}
                                 sx={{
                                     width: 40,
                                     height: 40,
@@ -176,6 +216,12 @@ function Footer() {
 
                             {/* Facebook */}
                             <IconButton
+                                onClick={() => {
+                                    window.open(
+                                        "https://www.facebook.com/spotlly",
+                                        "_blank"
+                                    );
+                                }}
                                 aria-label="Facebook"
                                 sx={{
                                     width: 40,
@@ -270,6 +316,7 @@ function Footer() {
                         }}
                     >
                         <Typography
+                        onClick={()=>{window.location.href="/terms"}}
                             component="a"
                             href="#"
                             sx={{
@@ -287,6 +334,7 @@ function Footer() {
                         </Typography>
 
                         <Typography
+                        onClick={()=>{window.location.href="/privacy-policy"}}
                             component="a"
                             href="#"
                             sx={{

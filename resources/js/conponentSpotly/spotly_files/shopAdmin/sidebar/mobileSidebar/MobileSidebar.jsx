@@ -33,13 +33,13 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import { changeCreateService, ChangeCurrentPage, changeOpenFeb, ChangePreviousPage, ChangeToggleDialogCreateTicket } from "../../../../../redux/slices/shopAdmin/ShopAdmin_slice";
 import { createService_selector, currentPage_selector, getService_selector, openFeb_selector, previousPage_selector } from "../../../../../redux/selectors/shopAdmin/ShopAdmin_selector";
 import { useSelector } from "react-redux";
-
-
-
+import ContentCutIcon from '@mui/icons-material/ContentCut';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import DvrIcon from '@mui/icons-material/Dvr';
 
 
 function MobileSidebar(props) {
-    let { dispatch } = props
+    let { dispatch ,maxServices,services } = props
     let openFeb = useSelector(openFeb_selector)
     console.log(openFeb)
     const currentPage = useSelector(currentPage_selector);
@@ -158,7 +158,7 @@ function MobileSidebar(props) {
                                 width: 50,
                                 height: 50,
                                 // p: 1,
-                                borderRadius: '30px 30px 0px 30px',
+                                borderRadius: '30px 30px 30px 30px',
                                 display: "flex",
                                 alignItems: "center",
                                 flexDirection: 'column',
@@ -187,7 +187,7 @@ function MobileSidebar(props) {
                     </Grow>
 
 
-                    <Grow
+                 {services?.length < maxServices &&  <Grow
                         in={openFeb}
                         timeout={300}
                         style={{
@@ -202,7 +202,7 @@ function MobileSidebar(props) {
 
                                 width: 50,
                                 height: 50,
-                                borderRadius: "30px 30px 30px 0px",
+                                borderRadius: "30px 30px 30px 30px",
                                 display: "flex",
                                 alignItems: "center",
                                 flexDirection: 'column',
@@ -217,7 +217,7 @@ function MobileSidebar(props) {
                             }}
                         >
 
-                            <LayersIcon
+                            <ContentCutIcon
                                 x={{ color: "#fff" }}
                                 fontSize='small'
                             />
@@ -227,7 +227,7 @@ function MobileSidebar(props) {
                                 خدمة
                             </Typography>
                         </Box>
-                    </Grow>
+                    </Grow>}
 
 
 
@@ -306,7 +306,7 @@ function MobileSidebar(props) {
 
                         }}
                     >
-                        <QueueIcon
+                        <DvrIcon
                             sx={{
                                 fontSize: 28,
                             }}
@@ -381,7 +381,8 @@ function MobileSidebar(props) {
                                     : "#000000",
                         }}
                     >
-                        <LayersIcon />
+                        <ContentCutIcon  sx={{transform: "rotate(-90deg)"}} />
+                        {/* <MedicalServicesIcon/> */}
                         <Typography
                             sx={{
                                 fontSize: 11,

@@ -25,6 +25,7 @@ let startService_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.st
 let completeService_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.completeService
 let toggleChangeStatusService_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.toggleChangeStatusService
 let cancelService_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.cancelService
+let recallUser_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.recallUser
 let getSubscription_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.getSubscription
 let getQueueStatus_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.getQueueStatus
 let dataQueueStatus_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.dataQueueStatus
@@ -60,4 +61,5 @@ export {
     getQueueStatus_selector,
     dataQueueStatus_selector,
     toggleUpdateQueueStatus_selector,
+    recallUser_selector
 }

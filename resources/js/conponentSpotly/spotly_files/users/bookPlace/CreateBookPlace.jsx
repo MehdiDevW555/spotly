@@ -74,7 +74,7 @@ const fieldStyle = {
 
 
 function CreateBookPlace(props) {
-    let { lastTicketNumber, waitingCount, tUEFF, uuid, ticketNumber } = props
+    let { lastTicketNumber, waitingCount, tUEFF, uuid, ticketNumber ,fcmToken} = props
     let scrollToBottom = () => {
         window.scrollTo({
             top: document.body.scrollHeight,
@@ -123,7 +123,7 @@ function CreateBookPlace(props) {
 
 
     let sendBookPlace = () => {
-        API_SEND_BOOK_PLACE(dispatch, uuid, full_name, phone, ServiceId, tUEFF)
+        API_SEND_BOOK_PLACE(dispatch, uuid, full_name, phone, ServiceId, tUEFF,fcmToken)
     }
 
 
@@ -403,7 +403,7 @@ function CreateBookPlace(props) {
                                 }}
                             />
 
-                            <Chip
+                            {/* <Chip
                                 label="15 دقيقة انتظار"
                                 sx={{
                                     ml: 1.5,
@@ -413,7 +413,7 @@ function CreateBookPlace(props) {
                                     color: "#fff",
                                     backdropFilter: "blur(10px)",
                                 }}
-                            />
+                            /> */}
                         </Box>
 
                     </Box>
@@ -546,7 +546,7 @@ function CreateBookPlace(props) {
                                 }}
                             />
 
-                            <Chip
+                            {/* <Chip
                                 label="15 دقيقة انتظار"
                                 sx={{
                                     ml: 0.5,
@@ -556,7 +556,7 @@ function CreateBookPlace(props) {
                                     color: "#fff",
                                     backdropFilter: "blur(10px)",
                                 }}
-                            />
+                            /> */}
                         </Box>
 
 
@@ -667,13 +667,17 @@ function CreateBookPlace(props) {
                     helperText={Errors?.phone?.[0] || ""}
                 />
 
-                <Typography
-                    sx={{ color: '#B7B6B6' }}
-                    fontWeight={800}
-                    mt={1}
-                >
-                    اختر الخدمة
-                </Typography>
+                {services?.length > 0 && (
+                    <Typography
+                        sx={{
+                            color: "#B7B6B6",
+                            fontWeight: 800,
+                            mt: 1,
+                        }}
+                    >
+                        اختر الخدمة
+                    </Typography>
+                )}
 
                 <Box
                     sx={{

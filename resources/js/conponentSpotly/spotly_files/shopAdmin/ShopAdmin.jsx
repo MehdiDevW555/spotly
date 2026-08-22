@@ -24,17 +24,23 @@ function ShopAdmin() {
     let dispatch = useDispatch()
     let infoShop = useSelector(infoShop_selector)
     let idShop = infoShop?.shop?.id
+    let uuid = infoShop?.shop?.uuid
     // console.log(idShop)
     let TUEChangeSetupCompleted = infoShop?.TUE
     let setupCompleted = infoShop?.shop?.setup_completed
     let getAllTicket = useSelector(getAllTicket_selector)
     let tickets = getAllTicket?.tickets
     let toggleChangeStatusService = useSelector(toggleChangeStatusService_selector)
+    let getServices = useSelector(getService_selector)
+    let services = getServices?.services
 
-let subscriptionState = useSelector(getSubscription_selector);
+let getSubscription = useSelector(getSubscription_selector);
 
-let subscription = subscriptionState?.subscription;
-let subscriptionLoading = subscriptionState?.loading;
+let subscription = getSubscription?.subscription;
+let maxServices = subscription?.plan?.max_services
+console.log(services)
+
+let subscriptionLoading = getSubscription?.loading;
 
     const [showLoading, setShowLoading] = useState(true);
 
@@ -51,6 +57,7 @@ let subscriptionLoading = subscriptionState?.loading;
         API_GET_INFO_SHOP(dispatch)
         API_GET_SUBSCRIPTION(dispatch)
         API_GET_PLANS(dispatch)
+        API_GET_SERVICES(dispatch, uuid)
     }, [TUEChangeSetupCompleted])
 
 
@@ -103,13 +110,13 @@ if (isSubscriptionExpired) {
 
 
                         <Box sx={{ overflowY: "auto" }}>
-                            <MainContent />
+                            <MainContent maxServices={maxServices} />
                         </Box>
 
                     </Box>
                     <Box>
                         <Sidebar dispatch={dispatch} />
-                        <MobileSidebar dispatch={dispatch}/>
+                        <MobileSidebar services={services} maxServices={maxServices} dispatch={dispatch}/>
                     </Box>
 
                 </Box>

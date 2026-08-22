@@ -293,7 +293,7 @@ function RegisterPage(props) {
                                         md: 250,
                                     },
                                     height: {
-                                        xs: 90,
+                                        xs: 110,
                                         sm: 150,
                                         md: 125,
                                     },
@@ -536,30 +536,67 @@ function RegisterPage(props) {
                                 </Box>
                             </Box>
 
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={acceptTerms}
-                                        onChange={(e) => setAcceptTerms(e.target.checked)}
-                                        sx={{
-                                            color: "#635BFF",
-                                            "&.Mui-checked": {
-                                                color: "#635BFF",
-                                            },
-                                        }}
-                                    />
-                                }
-                                label={
-                                    <Typography
-                                        sx={{
-                                            color: "#c7c4d8",
-                                            fontSize: 14,
-                                        }}
-                                    >
-                                        أوافق على الشروط والأحكام وسياسة الخصوصية
-                                    </Typography>
-                                }
-                            />
+                           <FormControlLabel
+    control={
+        <Checkbox
+            checked={acceptTerms}
+            onChange={(e) => setAcceptTerms(e.target.checked)}
+            sx={{
+                color: "#635BFF",
+                "&.Mui-checked": {
+                    color: "#635BFF",
+                },
+            }}
+        />
+    }
+    label={
+        <Typography
+            component="span"
+            sx={{
+                color: "#c7c4d8",
+                fontSize: 14,
+                lineHeight: 1.8,
+            }}
+        >
+            أوافق على{" "}
+            <Box
+                component="a"
+                href="/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                sx={{
+                    color: "#9d4edd",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    "&:hover": {
+                        textDecoration: "underline",
+                    },
+                }}
+            >
+                شروط الاستخدام
+            </Box>
+            {" "}وأقر باطلاعي على{" "}
+            <Box
+                component="a"
+                href="/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                sx={{
+                    color: "#9d4edd",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    "&:hover": {
+                        textDecoration: "underline",
+                    },
+                }}
+            >
+                سياسة الخصوصية
+            </Box>
+        </Typography>
+    }
+/>
 
                             <Button
                                 fullWidth

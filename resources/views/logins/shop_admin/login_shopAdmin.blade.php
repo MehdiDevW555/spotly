@@ -139,6 +139,49 @@
             font-weight: bold;
         }
 
+
+        .password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-left: 50px;
+}
+
+.toggle-password {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #8f9094;
+
+    cursor: pointer;
+
+    transition: color .2s ease;
+}
+
+.toggle-password:hover {
+    color: #635BFF;
+}
+
+.toggle-password svg {
+    display: block;
+}
+
         @media (max-width: 480px) {
             .login-card {
                 padding: 30px 20px;
@@ -158,7 +201,30 @@
         }
     </style>
 </head>
+<script>
+    function togglePassword() {
+        const password = document.getElementById("password");
+        const eyeIcon = document.getElementById("eye-icon");
+        const eyeOffIcon = document.getElementById("eye-off-icon");
+        const button = document.querySelector(".toggle-password");
 
+        if (password.type === "password") {
+            password.type = "text";
+
+            eyeIcon.style.display = "none";
+            eyeOffIcon.style.display = "block";
+
+            button.setAttribute("aria-label", "إخفاء كلمة المرور");
+        } else {
+            password.type = "password";
+
+            eyeIcon.style.display = "block";
+            eyeOffIcon.style.display = "none";
+
+            button.setAttribute("aria-label", "إظهار كلمة المرور");
+        }
+    }
+</script>
 <body>
 
     @if (session('login_error'))
@@ -187,14 +253,67 @@
             @csrf
 
             <div class="input-group">
-                <label>اسم المستخدم</label>
-                <input type="text" name="email" placeholder="أدخل اسم المستخدم" required>
+                <label>البريد الالكتروني (Email)</label>
+                <input type="text" name="email" placeholder="أدخل البريد الالكتروني" required>
             </div>
 
-            <div class="input-group">
-                <label>كلمة المرور</label>
-                <input type="password" name="password" placeholder="••••••••" required>
-            </div>
+          <div class="input-group">
+    <label>كلمة المرور</label>
+
+    <div class="password-wrapper">
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            required
+        >
+
+        <button
+            type="button"
+            class="toggle-password"
+            onclick="togglePassword()"
+            aria-label="إظهار كلمة المرور"
+        >
+            <!-- Eye -->
+            <svg
+                id="eye-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                <circle cx="12" cy="12" r="3" />
+            </svg>
+
+            <!-- Eye Off -->
+            <svg
+                id="eye-off-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="display: none;"
+            >
+                <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-4.123 5.194" />
+                <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+                <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696A10.75 10.75 0 0 1 6.24 6.5" />
+                <path d="m2 2 20 20" />
+            </svg>
+        </button>
+    </div>
+</div>
 
             <button type="submit" class="login-btn">
                 تسجيل الدخول

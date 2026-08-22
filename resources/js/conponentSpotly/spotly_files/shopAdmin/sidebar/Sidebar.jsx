@@ -31,6 +31,14 @@ import { useSelector } from "react-redux";
 import { createService_selector, currentPage_selector, getService_selector, pagesDashboard_selector, pagesServices_selector, pagesShopSetup_selector, previousPage_selector, toggleMenu_selector } from "../../../../redux/selectors/shopAdmin/ShopAdmin_selector";
 import { changeCreateService, ChangeCurrentPage, ChangePagesDashboard, ChangePagesServices, ChangePagesShopSetup, ChangePreviousPage, changeToggleChangeStatusService, ChangeToggleMenu } from "../../../../redux/slices/shopAdmin/ShopAdmin_slice";
 import Title from "./title/Title";
+import ContentCutIcon from '@mui/icons-material/ContentCut';
+import TvIcon from '@mui/icons-material/Tv';
+import DvrIcon from '@mui/icons-material/Dvr';
+
+
+
+
+
 
 export default function Sidebar(props) {
     let { dispatch } = props
@@ -129,7 +137,7 @@ export default function Sidebar(props) {
                                 bgcolor: previousPage === 'Queues' ? "#dae2fd" : "#e9edf5",
                             },
                         }}>
-                        <QueueIcon />
+                        <DvrIcon />
                         <Typography>
                             قوائم الانتظار
                         </Typography>
@@ -253,7 +261,7 @@ export default function Sidebar(props) {
                             },
                         }}
                     >
-                        <LayersIcon />
+                        <ContentCutIcon  sx={{transform: "rotate(-90deg)"}} />
                         <Typography>
                             الخدمات
                         </Typography>
@@ -371,19 +379,19 @@ export default function Sidebar(props) {
 
             {isSmallScreen && toggleMenu &&
 
-          <Drawer
-    anchor="right"
-    open={toggleMenu}
-    onClose={closeMenu}
-    sx={{
-        "& .MuiDrawer-paper": {
-            width: 260,
-            height: "100dvh",
-            borderRadius: "60px 0 0 0",
+                <Drawer
+                    anchor="right"
+                    open={toggleMenu}
+                    onClose={closeMenu}
+                    sx={{
+                        "& .MuiDrawer-paper": {
+                            width: 260,
+                            height: "100dvh",
+                            borderRadius: "60px 0 0 0",
 
-        },
-    }}
->
+                        },
+                    }}
+                >
                     <Box
                         sx={{
                             //  bgcolor:'red',
@@ -413,7 +421,7 @@ export default function Sidebar(props) {
                         />
 
                         <Title dispatch={dispatch} toggleMenu={toggleMenu} />
-                        <Divider sx={{my:1}} />
+                        <Divider sx={{ my: 1 }} />
                         <Box
                             sx={{
                                 display: "none",
@@ -468,7 +476,7 @@ export default function Sidebar(props) {
                                     bgcolor: previousPage === 'Queues' ? "#dae2fd" : "#e9edf5",
                                 },
                             }}>
-                            <QueueIcon />
+                            <DvrIcon />
                             <Typography>
                                 قوائم الانتظار
                             </Typography>
@@ -562,11 +570,7 @@ export default function Sidebar(props) {
 
                         <Box
                             onClick={() => {
-                                // dispatch(
-                                //     ChangeCurrentPage(
-                                //         getServices?.length > 0 ? 'AvailableServices' : 'EmptyServices'
-                                //     )
-                                // )
+
                                 dispatch(ChangeCurrentPage('Services'))
                                 dispatch(ChangePreviousPage('Services'))
                                 dispatch(changeCreateService({ TUEFF: !tUEFF }))
@@ -589,7 +593,7 @@ export default function Sidebar(props) {
                                 },
                             }}
                         >
-                            <LayersIcon />
+                            <ContentCutIcon  sx={{transform: "rotate(-90deg)"}} />
                             <Typography>
                                 الخدمات
                             </Typography>

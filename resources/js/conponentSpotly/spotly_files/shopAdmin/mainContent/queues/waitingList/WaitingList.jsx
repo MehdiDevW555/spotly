@@ -297,7 +297,7 @@ function WaitingList(props) {
                                         py: 2,
                                         borderTop: "1px solid",
                                         borderColor: "divider",
-                                        display: "flex",
+                                        display: "none",
                                         alignItems: "center",
                                         justifyContent: "space-between",
                                         flexWrap: "wrap",

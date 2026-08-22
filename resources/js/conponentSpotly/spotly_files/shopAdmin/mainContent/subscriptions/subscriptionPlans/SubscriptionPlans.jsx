@@ -14,6 +14,7 @@ import { getPlans_selector } from "../../../../../../redux/selectors/app/App_sel
 
 
 function SubscriptionPlans(props) {
+    let {getSubscription}=props
     let getPlans = useSelector(getPlans_selector)
     let plans = getPlans?.plans
 
@@ -82,29 +83,29 @@ function SubscriptionPlans(props) {
             {/* Plans */}
 
             <Box
-    sx={{
-        display: "grid",
+                sx={{
+                    display: "grid",
 
-        gridTemplateColumns: {
-            xs: "1fr",              // صغير: عمود واحد
-            sm: "repeat(2, 1fr)",   // متوسط: عمودين
-            lg: "repeat(2, 1fr)",   // كبير: عمودين
-        },
+                    gridTemplateColumns: {
+                        xs: "1fr",              // صغير: عمود واحد
+                        sm: "repeat(2, 1fr)",   // متوسط: عمودين
+                        lg: "repeat(2, 1fr)",   // كبير: عمودين
+                    },
 
-        gap: {xs:5,md:4},
+                    gap: { xs: 5, md: 4 },
 
-        alignItems: "stretch",
+                    alignItems: "stretch",
 
-        py: 4,
-        px: {xs:2,md:4},
+                    py: 4,
+                    px: { xs: 2, md: 4 },
 
-        borderRadius: '40px 40px 0 0',
+                    borderRadius: '40px 40px 0 0',
 
-        borderTop: "8px solid #6f0d67",
-        borderLeft: "2px solid #6f0d67",
-        borderRight: "2px solid #6f0d67",
+                    borderTop: "8px solid #6f0d67",
+                    borderLeft: "2px solid #6f0d67",
+                    borderRight: "2px solid #6f0d67",
 
-        backgroundImage: `
+                    backgroundImage: `
             radial-gradient(
                 circle,
                 rgba(97, 22, 116, 0.19) 1px,
@@ -112,9 +113,9 @@ function SubscriptionPlans(props) {
             )
         `,
 
-        backgroundSize: "20px 20px",
-    }}
->
+                    backgroundSize: "20px 20px",
+                }}
+            >
 
 
                 {
@@ -131,7 +132,7 @@ function SubscriptionPlans(props) {
                             : <SpaRoundedIcon />;
 
                         const features = [
-                            `${plan.max_staff} موظفين`,
+                            // `${plan.max_staff} موظفين`,
                             `${plan.max_services} خدمات`,
                             `${plan.max_daily_tickets} تذكرة يومياً`,
                             plan.max_branches === 1
@@ -145,9 +146,9 @@ function SubscriptionPlans(props) {
                             features.push("QR Code");
                         }
 
-                        if (plan.analytics_enabled) {
-                            features.push("إحصائيات متقدمة");
-                        }
+                        // if (plan.analytics_enabled) {
+                        //     features.push("إحصائيات متقدمة");
+                        // }
 
                         if (plan.priority_support) {
                             features.push("دعم ذو أولوية");
@@ -316,6 +317,12 @@ function SubscriptionPlans(props) {
 
                                 <Box sx={{ mt: 4 }}>
                                     <Button
+                                        onClick={() => {
+                                            window.open(
+                                                "https://wa.me/213782448880",
+                                                "_blank"
+                                            );
+                                        }}
                                         fullWidth
                                         sx={{
                                             py: 1.5,

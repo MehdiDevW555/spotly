@@ -195,7 +195,7 @@ function TicketDownload({
                             fontWeight={800}
                             color="#0F172A"
                         >
-                            {formatArabicText(lastCustomer?.name)}
+                            {formatArabicText(lastCustomer?.customer?.name)}
                         </Typography>
 
 
@@ -225,7 +225,7 @@ function TicketDownload({
                             fontWeight={800}
                             color="#0F172A"
                         >
-                            {lastCustomer?.phone ?? "-"}
+                            {lastCustomer?.customer?.phone ?? "-"}
                         </Typography>
 
 

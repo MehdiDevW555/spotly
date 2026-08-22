@@ -1,24 +1,31 @@
 {
-  "_Payments-DLUca1DB.js": {
-    "file": "assets/Payments-DLUca1DB.js",
-    "name": "Payments",
+  "_Close-BfCnbEGb.js": {
+    "file": "assets/Close-BfCnbEGb.js",
+    "name": "Close",
     "imports": [
-      "_Store-CgRFoFnu.js"
+      "_Store-BpDAtkMQ.js"
     ]
   },
-  "_Store-CgRFoFnu.js": {
-    "file": "assets/Store-CgRFoFnu.js",
+  "_KeyboardDoubleArrowDown-DBwzBRvf.js": {
+    "file": "assets/KeyboardDoubleArrowDown-DBwzBRvf.js",
+    "name": "KeyboardDoubleArrowDown",
+    "imports": [
+      "_Store-BpDAtkMQ.js"
+    ]
+  },
+  "_Store-BpDAtkMQ.js": {
+    "file": "assets/Store-BpDAtkMQ.js",
     "name": "Store"
   },
-  "_SuccessShopSetup-!~{007}~.js": {
+  "_SuccessShopSetup-!~{008}~.js": {
     "file": "assets/SuccessShopSetup-CLLlcC51.css",
-    "src": "_SuccessShopSetup-!~{007}~.js"
+    "src": "_SuccessShopSetup-!~{008}~.js"
   },
-  "_SuccessShopSetup-CqckNIIR.js": {
-    "file": "assets/SuccessShopSetup-CqckNIIR.js",
+  "_SuccessShopSetup-DPhMYx3O.js": {
+    "file": "assets/SuccessShopSetup-DPhMYx3O.js",
     "name": "SuccessShopSetup",
     "imports": [
-      "_Store-CgRFoFnu.js"
+      "_Store-BpDAtkMQ.js"
     ],
     "css": [
       "assets/SuccessShopSetup-CLLlcC51.css"
@@ -64,6 +71,10 @@
     "file": "assets/introImage1-D0p5Ujxr.png",
     "src": "resources/img/app/introImage1.png"
   },
+  "resources/img/app/offer-first-20-customers.png": {
+    "file": "assets/offer-first-20-customers-ck2U6jwf.png",
+    "src": "resources/img/app/offer-first-20-customers.png"
+  },
   "resources/img/app/qrCodeImg.png": {
     "file": "assets/qrCodeImg-BvsamApz.png",
     "src": "resources/img/app/qrCodeImg.png"
@@ -97,7 +108,7 @@
     "src": "resources/img/app/step1.png"
   },
   "resources/img/app/step2.png": {
-    "file": "assets/step2-Cq1OflJK.png",
+    "file": "assets/step2-CIUVQhza.png",
     "src": "resources/img/app/step2.png"
   },
   "resources/img/app/step3.png": {
@@ -105,11 +116,11 @@
     "src": "resources/img/app/step3.png"
   },
   "resources/img/app/step4.png": {
-    "file": "assets/step4-B-IZs0UH.png",
+    "file": "assets/step4-B108NGRI.png",
     "src": "resources/img/app/step4.png"
   },
   "resources/img/app/step5.png": {
-    "file": "assets/step5-ltXn_5FG.png",
+    "file": "assets/step5-C0rN3pUR.png",
     "src": "resources/img/app/step5.png"
   },
   "resources/img/app/verifyEmail.png": {
@@ -117,31 +128,34 @@
     "src": "resources/img/app/verifyEmail.png"
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BypgJWWF.js",
+    "file": "assets/app-DpFLTuaw.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "imports": [
-      "_Store-CgRFoFnu.js",
-      "_Payments-DLUca1DB.js"
+      "_Store-BpDAtkMQ.js",
+      "_Close-BfCnbEGb.js",
+      "_KeyboardDoubleArrowDown-DBwzBRvf.js"
     ],
     "assets": [
       "assets/introImage1-D0p5Ujxr.png",
       "assets/step1-Br4J6H97.png",
-      "assets/step2-Cq1OflJK.png",
+      "assets/step2-CIUVQhza.png",
       "assets/step3-Bm9cOMEv.png",
-      "assets/step5-ltXn_5FG.png"
+      "assets/step4-B108NGRI.png",
+      "assets/step5-C0rN3pUR.png",
+      "assets/offer-first-20-customers-ck2U6jwf.png"
     ]
   },
   "resources/js/shopAdmin.jsx": {
-    "file": "assets/shopAdmin-hTFuz-Ry.js",
+    "file": "assets/shopAdmin-Cu3I6ZC2.js",
     "name": "shopAdmin",
     "src": "resources/js/shopAdmin.jsx",
     "isEntry": true,
     "imports": [
-      "_Store-CgRFoFnu.js",
-      "_Payments-DLUca1DB.js",
-      "_SuccessShopSetup-CqckNIIR.js"
+      "_Store-BpDAtkMQ.js",
+      "_Close-BfCnbEGb.js",
+      "_SuccessShopSetup-DPhMYx3O.js"
     ],
     "dynamicImports": [
       "node_modules/workbox-window/build/workbox-window.prod.es5.mjs"
@@ -158,13 +172,14 @@
     ]
   },
   "resources/js/users.jsx": {
-    "file": "assets/users-C_9LS-02.js",
+    "file": "assets/users-FzCAHcqK.js",
     "name": "users",
     "src": "resources/js/users.jsx",
     "isEntry": true,
     "imports": [
-      "_Store-CgRFoFnu.js",
-      "_SuccessShopSetup-CqckNIIR.js"
+      "_Store-BpDAtkMQ.js",
+      "_SuccessShopSetup-DPhMYx3O.js",
+      "_KeyboardDoubleArrowDown-DBwzBRvf.js"
     ]
   }
 }

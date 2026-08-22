@@ -93,15 +93,15 @@ export default function Navbar(props) {
                     sx={{
                         // borderRadius: '50%',
                         // background: '#e8cfff',
-                        filter: `
-                            drop-shadow(0 5px 8px rgba(158, 155, 158, 0.99))
-                            drop-shadow(0 0 8px rgba(41, 41, 41, 0))
-                        `,
+                        // filter: `
+                        //     drop-shadow(0 5px 8px rgba(158, 155, 158, 0.99))
+                        //     drop-shadow(0 0 8px rgba(41, 41, 41, 0))
+                        // `,
                         //  boxShadow: "0 6px 15px rgb(94, 94, 94)",
                         // ml:-40,
                         // border:1,
-                        width: 200,
-                        height: 90,
+                        width: 180,
+                        height: 80,
                         display: {
                             xs: "none",
                             lg: "flex",
@@ -193,7 +193,7 @@ export default function Navbar(props) {
                     // border:1,
                     ml: -.5,
                     width: 140,
-                    height: 70,
+                    height: 65,
                     display: {
                         xs: "flex",
                         lg: "none",
@@ -267,7 +267,10 @@ export default function Navbar(props) {
                     sx={{
                         background:
                             "linear-gradient(135deg, #743DB1 0%, #47CBE4 50%, #3989EC 100%)",
-                        display: 'flex',
+                        display: {
+                            xs: "none",
+                            sm: "none",
+                        },
                         alignItems: 'center',
                         justifyContent: 'center',
                         borderRadius: '50%',
@@ -278,10 +281,7 @@ export default function Navbar(props) {
                         boxShadow: "0 5px 10px rgb(94, 94, 94)",
 
 
-                        display: {
-                            xs: "none",
-                            sm: "flex",
-                        },
+
                     }}
                 />
 

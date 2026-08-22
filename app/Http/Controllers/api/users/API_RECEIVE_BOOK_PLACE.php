@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\users;
 
 use App\Http\Controllers\Controller;
 use App\Events\TicketCreated;
+use App\Models\customerDevices\CustomerDevices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\shopAdmin\ShopAdmin;
@@ -23,15 +24,14 @@ class API_RECEIVE_BOOK_PLACE extends Controller
                 'full_name' => 'required|string|max:255',
                 'phone'     => 'required|string|size:10',
                 'serviceId' => 'nullable|integer',
+                'fcm_token' => 'nullable|string',
             ],
             [
                 'uuid.required'      => 'معرف المحل مطلوب.',
                 'uuid.string'        => 'معرف المحل غير صالح.',
-
                 'full_name.required' => 'الاسم الكامل مطلوب.',
                 'full_name.string'   => 'الاسم الكامل يجب أن يكون نصاً.',
                 'full_name.max'      => 'الاسم الكامل لا يجب أن يتجاوز 255 حرفاً.',
-
                 'phone.required'     => 'رقم الهاتف مطلوب.',
                 'phone.string'       => 'رقم الهاتف غير صالح.',
                 'phone.size'         => 'رقم الهاتف يجب أن يتكون من 10 أرقام.',
@@ -55,16 +55,13 @@ class API_RECEIVE_BOOK_PLACE extends Controller
             ], 404);
         }
 
-        // هل توجد خدمات نشطة؟
         $hasServices = Services::where('shop_id', $shop->id)
             ->where('status', 'active')
             ->exists();
 
         $service = null;
 
-        // إذا كان المحل يملك خدمات نشطة فاختيار الخدمة يصبح إجبارياً
         if ($hasServices) {
-
             if (!$request->serviceId) {
                 return response()->json([
                     'success' => false,
@@ -103,7 +100,40 @@ class API_RECEIVE_BOOK_PLACE extends Controller
             'customer_id'   => $customer->id,
             'ticket_number' => $ticketNumber,
             'status'        => 'waiting',
+            'device_of_customer' => json_encode([
+                'ip' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+            ]),
         ]);
+
+        // ============================================================
+        // ✅ الحل: حفظ FCM Token مع منع التكرار
+        // ============================================================
+        if ($request->filled('fcm_token')) {
+            try {
+                // البحث عن جهاز موجود بنفس التذكرة
+                $device = CustomerDevices::where('ticket_id', $ticket->id)->first();
+
+                if ($device) {
+                    // تحديث الـ Token إذا كان موجوداً
+                    $device->update([
+                        'fcm_token' => $request->fcm_token,
+                        'near_turn_last_count' => null,
+                    ]);
+                } else {
+                    // إنشاء جديد إذا لم يكن موجوداً
+                    $device = CustomerDevices::create([
+                        'ticket_id' => $ticket->id,
+                        'fcm_token' => $request->fcm_token,
+                        'near_turn_notified' => false,
+                        'near_turn_last_count' => null,
+                    ]);
+                }
+
+            } catch (\Throwable $e) {
+                
+            }
+        }
 
         event(new TicketCreated($ticket));
 

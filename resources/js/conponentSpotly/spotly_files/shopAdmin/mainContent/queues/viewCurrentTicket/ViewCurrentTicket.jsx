@@ -24,7 +24,7 @@ import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import API_START_SERVICE from "../../../../../api/shopAdmin/queue/API_START_SERVICE";
 import ConfirmationNumberRoundedIcon from '@mui/icons-material/ConfirmationNumberRounded';
 import { useDispatch, useSelector } from "react-redux";
-import { cancelService_selector, completeService_selector, dataQueueStatus_selector, getQueueStatus_selector, startService_selector } from "../../../../../../redux/selectors/shopAdmin/ShopAdmin_selector";
+import { cancelService_selector, completeService_selector, dataQueueStatus_selector, getQueueStatus_selector, recallUser_selector, startService_selector } from "../../../../../../redux/selectors/shopAdmin/ShopAdmin_selector";
 import API_COMPLETE_SERVICE from "../../../../../api/shopAdmin/queue/API_COMPLETE_SERVICE";
 import { useEffect, useState } from "react";
 import "../../../../../../echo";
@@ -39,9 +39,11 @@ import PauseRoundedIcon from '@mui/icons-material/PauseRounded';
 import API_CANCEL_SERVICE from "../../../../../api/shopAdmin/queue/API_CANCEL_SERVICE";
 import CurrentTicketSkeleton from "./currentTicketSkeleton/CurrentTicketSkeleton";
 import API_UPDATE_QUEUE_STATUS from "../../../../../api/shopAdmin/queue/API_UPDATE_QUEUE_STATUS";
-
-
-
+import API_RECALL_USER from "../../../../../api/shopAdmin/queue/API_RECALL_USER";
+import CampaignIcon from '@mui/icons-material/Campaign';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import PhoneIcon from '@mui/icons-material/Phone';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 function ViewCurrentTicket(props) {
     // const [queueOpen, setQueueOpen] = useState(1);
@@ -58,8 +60,9 @@ function ViewCurrentTicket(props) {
     let loadingCompleteService = completeService?.loading
     let cancelService = useSelector(cancelService_selector)
     let loadingCancelService = cancelService?.loading
+    let recallUser = useSelector(recallUser_selector)
+    let loadingRecallUser = recallUser?.loading
     let idTicket = CurrentTicket?.id
-
     let dataQueueStatus = useSelector(dataQueueStatus_selector)
     let dispatch = useDispatch()
     let handleStartService = () => {
@@ -71,6 +74,9 @@ function ViewCurrentTicket(props) {
 
     let handleCancelService = () => {
         API_CANCEL_SERVICE(dispatch, idTicket)
+    }
+    let handelRecallUser = () => {
+        API_RECALL_USER(dispatch, idTicket)
     }
     const handleQueueToggle = () => {
 
@@ -124,33 +130,33 @@ function ViewCurrentTicket(props) {
 
     useEffect(() => {
 
-    window.Echo
-        .channel(`shop.${idShop}`)
-        .listen(".queue.status.changed", (e) => {
+        window.Echo
+            .channel(`shop.${idShop}`)
+            .listen(".queue.status.changed", (e) => {
 
-            console.log("QUEUE STATUS CHANGED:", e.queue_open);
+                console.log("QUEUE STATUS CHANGED:", e.queue_open);
 
-            dispatch(changeGetQueueStatus({
-                queueStatus: e.queue_open
-            }));
+                dispatch(changeGetQueueStatus({
+                    queueStatus: e.queue_open
+                }));
 
-        })
-        .listen(".ticket.status.changed", (e) => {
+            })
+            .listen(".ticket.status.changed", (e) => {
 
-            dispatch(changeToggleChangeStatusService());
+                dispatch(changeToggleChangeStatusService());
 
-        })
-        .listen(".ticket.created", () => {
+            })
+            .listen(".ticket.created", () => {
 
-            dispatch(changeToggleChangeStatusService());
+                dispatch(changeToggleChangeStatusService());
 
-        });
+            });
 
-    return () => {
-        window.Echo.leave(`shop.${idShop}`);
-    };
+        return () => {
+            window.Echo.leave(`shop.${idShop}`);
+        };
 
-}, [idShop]);
+    }, [idShop]);
 
     return (
         <Box
@@ -222,24 +228,9 @@ function ViewCurrentTicket(props) {
                                                 : "#ef4444",
 
                                             animation: "pulse 1.5s infinite",
-
-                                            "@keyframes pulse": {
-                                                "0%": {
-                                                    boxShadow: queueOpen
-                                                        ? "0 0 0 0 rgba(34,197,94,.7)"
-                                                        : "0 0 0 0 rgba(239,68,68,.7)",
-                                                },
-                                                "70%": {
-                                                    boxShadow: queueOpen
-                                                        ? "0 0 0 10px rgba(34,197,94,0)"
-                                                        : "0 0 0 10px rgba(239,68,68,0)",
-                                                },
-                                                "100%": {
-                                                    boxShadow: queueOpen
-                                                        ? "0 0 0 0 rgba(34,197,94,0)"
-                                                        : "0 0 0 0 rgba(239,68,68,0)",
-                                                },
-                                            },
+                                            boxShadow: queueOpen
+                                                ? "0 0 0 0 rgba(34,197,94,.7)"
+                                                : "0 0 0 0 rgba(239,68,68,.7)",
                                         }}
                                     />
 
@@ -447,24 +438,10 @@ function ViewCurrentTicket(props) {
                                                 : "#ef4444",
 
                                             animation: "pulse 1.5s infinite",
+                                            boxShadow: queueOpen
+                                                ? "0 0 0 0 rgba(34,197,94,.7)"
+                                                : "0 0 0 0 rgba(239,68,68,.7)",
 
-                                            "@keyframes pulse": {
-                                                "0%": {
-                                                    boxShadow: queueOpen
-                                                        ? "0 0 0 0 rgba(34,197,94,.7)"
-                                                        : "0 0 0 0 rgba(239,68,68,.7)",
-                                                },
-                                                "70%": {
-                                                    boxShadow: queueOpen
-                                                        ? "0 0 0 10px rgba(34,197,94,0)"
-                                                        : "0 0 0 10px rgba(239,68,68,0)",
-                                                },
-                                                "100%": {
-                                                    boxShadow: queueOpen
-                                                        ? "0 0 0 0 rgba(34,197,94,0)"
-                                                        : "0 0 0 0 rgba(239,68,68,0)",
-                                                },
-                                            },
                                         }}
                                     />
 
@@ -791,21 +768,169 @@ function ViewCurrentTicket(props) {
                                     )
                                 }
 
-                                <IconButton
-                                    title="إعادة النداء"
-                                    sx={{
-                                        p: 1.5,
-                                        borderRadius: 3,
-                                        border: "1px solid rgba(255,255,255,.2)",
-                                        bgcolor: "rgba(255,255,255,.1)",
-                                        color: "#fff",
-                                        "&:hover": {
-                                            bgcolor: "rgba(255,255,255,.2)",
-                                        },
-                                    }}
-                                >
-                                    <RedoOutlinedIcon />
-                                </IconButton>
+                                {loadingRecallUser === 1 ? (
+                                    <IconButton
+
+                                        sx={{
+                                            p: 1.5,
+                                            borderRadius: 3,
+                                            bgcolor: "#c90303",
+                                            border: "1px solid rgba(255,255,255,.2)",
+                                            bgcolor: "rgb(219, 255, 226)",
+                                            fontWeight: 800,
+                                            boxShadow: 3,
+                                            "&:hover": {
+                                                bgcolor: "rgb(219, 255, 226)",
+                                            },
+
+                                            "&:focus": {
+                                                bgcolor: "rgb(219, 255, 226)",
+                                            },
+                                        }}
+                                    >
+                                        {/* <CircularProgress
+                                            size={22}
+                                            sx={{ color: "#fff" }}
+                                        /> */}
+
+
+
+                                        <Box
+                                            sx={{
+                                                position: "relative",
+                                                display: "inline-flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                            }}
+                                        >
+                                            {/* أيقونة النداء */}
+                                            <NotificationsActiveIcon
+                                                sx={{
+                                                    color: "#22c55e",
+                                                    // fontSize: 25,
+
+                                                    animation: "bellPulse 1s ease-in-out infinite",
+
+                                                    "@keyframes bellPulse": {
+                                                        "0%, 100%": {
+                                                            transform: "scale(1)",
+                                                            opacity: 0.8,
+                                                        },
+
+                                                        "50%": {
+                                                            transform: "scale(1)",
+                                                            opacity: 1,
+                                                        },
+                                                    },
+                                                }}
+                                            />
+
+                                            {/* القوس الأول */}
+                                            <Box
+                                                sx={{
+                                                    position: "absolute",
+                                                    top: 1,
+                                                    right: -1,
+                                                    width: 7,
+                                                    height: 7,
+
+                                                    borderTop: "3px solid #86efac",
+                                                    borderRight: "3px solid #86efac",
+                                                    borderTopRightRadius: "100%",
+
+                                                    transform: "rotate(0deg)",
+
+                                                    animation: "signalWave 1.2s ease-out infinite",
+                                                }}
+                                            />
+
+                                            {/* القوس الثاني */}
+                                            <Box
+                                                sx={{
+                                                    position: "absolute",
+                                                    top: -3,
+                                                    right: -6,
+                                                    width: 11,
+                                                    height: 11,
+
+                                                    borderTop: "3px solid #22c55e",
+                                                    borderRight: "3px solid #22c55e",
+                                                    borderTopRightRadius: "100%",
+
+                                                    animation: "signalWave 1.2s ease-out infinite",
+                                                    animationDelay: "0.2s",
+                                                }}
+                                            />
+
+                                            {/* القوس الثالث */}
+                                            <Box
+                                                sx={{
+                                                    position: "absolute",
+                                                    top: -7,
+                                                    right: -10,
+                                                    width: 15,
+                                                    height: 15,
+
+                                                    borderTop: "3px solid #16a34a",
+                                                    borderRight: "3px solid #16a34a",
+                                                    borderTopRightRadius: "100%",
+
+                                                    animation: "signalWave 1.2s ease-out infinite",
+                                                    animationDelay: "0.4s",
+                                                }}
+                                            />
+
+                                            <style>
+                                                {`
+                                                @keyframes signalWave {
+                                                    0% {
+                                                        opacity: 0;
+                                                        transform: scale(0.7);
+                                                    }
+
+                                                    30% {
+                                                        opacity: 1;
+                                                    }
+
+                                                    100% {
+                                                        opacity: 0;
+                                                        transform: scale(1.15);
+                                                    }
+                                                }
+                                            `}
+                                            </style>
+                                        </Box>
+
+                                    </IconButton>
+
+                                ) : (
+                                    <IconButton
+                                        onClick={handelRecallUser}
+                                        title="إعادة النداء"
+                                        sx={{
+                                            p: 1.5,
+                                            borderRadius: 3,
+                                            border: "1px solid rgba(255,255,255,.2)",
+                                            bgcolor: "rgba(255,255,255,.1)",
+                                            color: "#fff",
+                                            boxShadow: 3,
+                                            "&:hover": {
+                                                bgcolor: "rgba(255,255,255,.1)",
+                                            },
+
+                                            "&:focus": {
+                                                bgcolor: "rgba(255,255,255,.1)",
+                                            },
+
+                                        }}
+                                    >
+                                        <NotificationsActiveIcon />
+
+
+                                    </IconButton>
+                                )
+
+                                }
 
                                 {
                                     loadingCancelService === 1 ? (

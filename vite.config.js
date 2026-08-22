@@ -68,11 +68,11 @@ export default defineConfig({
             ],
             refresh: true,
 
-            server: {
-                hmr: {
-                    host: '192.168.100.6',
-                },
-            },
+            // server: {
+            //     hmr: {
+            //         host: '192.168.100.6',
+            //     },
+            // },
         }),
 
         react(),
@@ -109,8 +109,8 @@ export default defineConfig({
         }),
     ],
 
-    server: {
-        host: '192.168.100.6',
-        port: 5173,
-    },
+    // server: {
+    //     host: '192.168.100.6',
+    //     port: 5173,
+    // },
 });

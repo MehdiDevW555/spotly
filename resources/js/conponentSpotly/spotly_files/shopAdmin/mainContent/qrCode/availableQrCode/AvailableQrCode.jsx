@@ -27,10 +27,15 @@ import LaunchOutlinedIcon from '@mui/icons-material/LaunchOutlined';
 function AvailableQrCode(props) {
     let { infoShop } = props
     let uuid = infoShop?.shop?.uuid
-    let qrUrl = uuid
-        ? `http://192.168.100.6:8000/q/${uuid}`
-        : null;
+    // let qrUrl = uuid
+    //     ? `http://192.168.100.6:8000/q/${uuid}`
+    //     : null;
 
+    let qrUrl = uuid
+    ? `${import.meta.env.VITE_APP_URL}/q/${uuid}`
+    : null;
+
+    console.log(import.meta.env.VITE_APP_URL);
 
     const [openCopy, setOpenCopy] = useState(false);
 
@@ -270,7 +275,7 @@ function AvailableQrCode(props) {
                                         position: "absolute",
                                         left: 25,
                                         right: 25,
-                                        top: "55%",
+                                        top: "45%",
                                         animation: `${scanAnimation} 3s ease-in-out infinite`,
                                     }}
                                 >
@@ -649,7 +654,7 @@ function AvailableQrCode(props) {
 
 
                                     {/* Scans */}
-                                    <Paper
+                                    {/* <Paper
                                         elevation={0}
                                         sx={{
                                             p: 2.5,
@@ -716,7 +721,7 @@ function AvailableQrCode(props) {
                                         </Typography>
 
 
-                                    </Paper>
+                                    </Paper> */}
 
 
                                 </Box>

@@ -6,6 +6,8 @@ import Subscription from "./subscription/Subscription";
 import NewActivity from "./newActivity/NewActivity";
 
 export default function Dashboard() {
+    // let {getSubscription}=props
+
     return (
         <Box
             dir="rtl"

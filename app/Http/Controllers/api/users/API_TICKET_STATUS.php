@@ -10,7 +10,7 @@ class API_TICKET_STATUS extends Controller
 {
     public function check($ticket_uuid)
     {
-         $ticket = Tickets::with([
+        $ticket = Tickets::with([
             'customer',
             'service'
         ])
@@ -40,15 +40,14 @@ class API_TICKET_STATUS extends Controller
                 ->where('ticket_number', '<', $ticket->ticket_number)
                 ->count();
 
-
-
+           
             return response()->json([
                 'active' => true,
                 'status' => $ticket->status,
                 'ticket_number' => $ticket->ticket_number,
                 'people_before_me' => $peopleBeforeMe,
 
-                 'customer' => $ticket
+                'customer' => $ticket
             ]);
         }
 

@@ -12,7 +12,7 @@ import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 
 function Services(props) {
     let dispatch = useDispatch()
-    let { idShop } = props
+    let { idShop,maxServices } = props
 
 
     let getServices = useSelector(getService_selector)
@@ -31,7 +31,7 @@ function Services(props) {
             sx={{
                 minHeight: "100vh",
                 position: 'relative',
-                
+
                 // p: 3,
                 // bgcolor: "#f7f9fb",
                 // display: "flex",
@@ -39,7 +39,7 @@ function Services(props) {
         >
             {services?.length === 0 && <EmptyServices />}
             {/* {currentPage === "CreateService" && <CreateService idShop={idShop} />} */}
-            {services?.length > 0 && <AvailableServices idShop={idShop} services = {services} />}
+            {services?.length > 0 && <AvailableServices idShop={idShop} services = {services}  maxServices={maxServices} />}
         </Box>
     )
 

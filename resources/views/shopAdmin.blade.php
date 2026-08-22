@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
+<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        <title>Spotlly</title>
         <link rel="manifest" href="/build/manifest.webmanifest">
 @viteReactRefresh
     @vite(['resources/js/shopAdmin.jsx'])

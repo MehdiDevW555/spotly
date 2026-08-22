@@ -30,7 +30,7 @@ function Header() {
                 zIndex: 9999,
                 bgcolor: "rgba(15,15,30,.8)",
                 backdropFilter: "blur(20px)",
-                borderBottom: "1px solid rgba(255,255,255,.08)",
+                // borderBottom: "1px solid rgba(255,255,255,.08)",
             }}
         >
             <Container maxWidth="lg">

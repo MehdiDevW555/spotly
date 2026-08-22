@@ -22,11 +22,17 @@ import BlockIcon from '@mui/icons-material/Block';
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import { ChangeCurrentPage, ChangePagesServices, ChangePreviousPage } from "../../../../../../redux/slices/shopAdmin/ShopAdmin_slice";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import API_GET_SERVICES from "../../../../../api/shopAdmin/services/API_GET_SERVICES";
+import FeatureUnavailableDialog from "../../../../../dialog/shopAdmin/mainContent/services/FeatureUnavailableDialog";
 
 export default function AvailableServices(props) {
-    let { idShop, services } = props
+    let { idShop, services, maxServices } = props
+    const [openUnavailable, setOpenUnavailable] = useState(false);
+
+
+
+
     let dispatch = useDispatch()
 
     let handelGoCreateService = () => {
@@ -34,89 +40,6 @@ export default function AvailableServices(props) {
         dispatch(ChangeCurrentPage('CreateService'))
         // }
     }
-    const servicess = [
-        {
-            id: 1,
-            name: "قص شعر (ستايل)",
-            description:
-                "قصة شعر عصرية تشمل غسيل الشعر وتصفيفه باستخدام أفضل المنتجات العالمية.",
-            duration: "30-45 دقيقة",
-            bookings: "12 تذكرة",
-            price: "50 ر.س",
-            active: true,
-        },
-        {
-            id: 2,
-            name: "حلاقة وتحديد ذقن",
-            description:
-                "تحديد الذقن بالخيط أو الموس مع ترطيب البشرة باستخدام زيوت طبيعية.",
-            duration: "20 دقيقة",
-            bookings: "24 تذكرة",
-            price: "35 ر.س",
-            active: true,
-        },
-        {
-            id: 3,
-            name: "تنظيف بشرة VIP",
-            description:
-                "خدمة متكاملة لتنظيف المسام العميقة باستخدام البخار والماسكات المنعشة.",
-            duration: "60 دقيقة",
-            bookings: "0 تذكرة",
-            price: "120 ر.س",
-            active: false,
-        },
-        {
-            id: 3,
-            name: "تنظيف بشرة VIP",
-            description:
-                "خدمة متكاملة لتنظيف المسام العميقة باستخدام البخار والماسكات المنعشة.",
-            duration: "60 دقيقة",
-            bookings: "0 تذكرة",
-            price: "120 ر.س",
-            active: false,
-        },
-        {
-            id: 3,
-            name: "تنظيف بشرة VIP",
-            description:
-                "خدمة متكاملة لتنظيف المسام العميقة باستخدام البخار والماسكات المنعشة.",
-            duration: "60 دقيقة",
-            bookings: "0 تذكرة",
-            price: "120 ر.س",
-            active: false,
-        },
-        {
-            id: 3,
-            name: "تنظيف بشرة VIP",
-            description:
-                "خدمة متكاملة لتنظيف المسام العميقة باستخدام البخار والماسكات المنعشة.",
-            duration: "60 دقيقة",
-            bookings: "0 تذكرة",
-            price: "120 ر.س",
-            active: false,
-        },
-        {
-            id: 3,
-            name: "تنظيف بشرة VIP",
-            description:
-                "خدمة متكاملة لتنظيف المسام العميقة باستخدام البخار والماسكات المنعشة.",
-            duration: "60 دقيقة",
-            bookings: "0 تذكرة",
-            price: "120 ر.س",
-            active: false,
-        },
-        {
-            id: 3,
-            name: "تنظيف بشرة VIP",
-            description:
-                "خدمة متكاملة لتنظيف المسام العميقة باستخدام البخار والماسكات المنعشة.",
-            duration: "60 دقيقة",
-            bookings: "0 تذكرة",
-            price: "120 ر.س",
-            active: false,
-        },
-
-    ];
 
     return (
         <Box
@@ -199,7 +122,7 @@ export default function AvailableServices(props) {
                         zIndex: 100,
                     }}
                 >
-                    <Button
+                    {services?.lenght > maxServices && <Button
                         onClick={() => { dispatch(ChangeCurrentPage('CreateService')), dispatch(ChangePreviousPage('Services')) }}
                         sx={{
                             px: 2,
@@ -217,8 +140,9 @@ export default function AvailableServices(props) {
                     >
                         <AddCircleRoundedIcon />
                         <Typography sx={{ mr: 1, fontSize: 16 }}> إضافة  </Typography>
-                    </Button>
+                    </Button>}
                     <Button
+                    onClick={() => setOpenUnavailable(true)}
                         sx={{
                             px: 2,
                             py: 1,
@@ -256,6 +180,11 @@ export default function AvailableServices(props) {
             </Box>
 
             {/* Services */}
+
+            <FeatureUnavailableDialog
+                open={openUnavailable}
+                handleClose={() => setOpenUnavailable(false)}
+            />
 
             <Box
                 dir='rtl'
@@ -460,14 +389,14 @@ export default function AvailableServices(props) {
                                             </Box>
 
 
-                                                <Typography fontWeight={700}>
-                                                    {service.estimated_time}{' '}
-                                                    {service.estimated_time === 1
-                                                        ? 'دقيقة'
-                                                        : service.estimated_time >= 2 && service.estimated_time <= 10
-                                                            ? 'دقائق'
-                                                            : 'دقيقة'}
-                                                </Typography>
+                                            <Typography fontWeight={700}>
+                                                {service.estimated_time}{' '}
+                                                {service.estimated_time === 1
+                                                    ? 'دقيقة'
+                                                    : service.estimated_time >= 2 && service.estimated_time <= 10
+                                                        ? 'دقائق'
+                                                        : 'دقيقة'}
+                                            </Typography>
                                         </Box>
 
 
@@ -530,6 +459,7 @@ export default function AvailableServices(props) {
                                     >
 
                                         <IconButton
+                                            onClick={() => setOpenUnavailable(true)}
                                             sx={{
                                                 bgcolor: "#1976D2",
                                                 background:
@@ -542,6 +472,7 @@ export default function AvailableServices(props) {
                                             <EditIcon />
                                         </IconButton>
                                         <IconButton
+                                            onClick={() => setOpenUnavailable(true)}
                                             sx={{
                                                 background:
                                                     "linear-gradient(135deg, #faa614 0%, #fab216 50%, #D46B08 100%)",
@@ -554,6 +485,7 @@ export default function AvailableServices(props) {
                                             <BlockIcon />
                                         </IconButton>
                                         <IconButton
+                                            onClick={() => setOpenUnavailable(true)}
                                             // color="error"
                                             sx={{
                                                 background:

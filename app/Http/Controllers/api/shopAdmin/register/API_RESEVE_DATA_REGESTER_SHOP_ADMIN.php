@@ -85,6 +85,8 @@ class API_RESEVE_DATA_REGESTER_SHOP_ADMIN extends Controller
             ]);
         }
 
+
+
         // إنشاء Pending جديد
         $pending = PendingShopAdmin::create([
             'full_name' => $data['full_name'],
@@ -156,6 +158,10 @@ public function verifyEmail(Request $request)
         'password'  => $pending->password,
         'role'      => 'shop_admin',
         'email_verified_at' => now(),
+        'device_of_user' => json_encode([
+        'ip' => $request->ip(),
+        'user_agent' => $request->userAgent(),
+    ]),
     ]);
 
     $shop = ShopAdmin::create([
