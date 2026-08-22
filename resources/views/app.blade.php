@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
 
@@ -21,6 +24,7 @@
     >
 
     @viteReactRefresh
+
     @vite(['resources/js/app.jsx'])
 
     <link rel="preload" href="/images/spotlyLogo.png" as="image">
@@ -31,4 +35,21 @@
         href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap"
         rel="stylesheet"
     >
+
+    <style>
+     * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+</style>
 </head>
+
+<body >
+
+    <div id="app"></div>
+
+</body>
+
+</html>

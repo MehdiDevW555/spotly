@@ -37,9 +37,18 @@
         href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap"
         rel="stylesheet"
     >
+
+    <style>
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+</style>
 </head>
 
-<body class="antialiased">
+<body >
 
     <div id="app"></div>
 
