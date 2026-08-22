@@ -125,7 +125,7 @@ export default function TrialAlert(props) {
                                 sx={{
                                     mr: -0.5,
                                     fontSize: 20,
-                                    color: "#635BFF",
+                                    color: "#1976d2",
                                 }}
                             />
                         </Button>

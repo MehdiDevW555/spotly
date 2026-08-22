@@ -85,13 +85,13 @@ export default defineConfig({
         short_name: 'Spotlly',
         description: 'Spotlly هو نظام ذكي لإدارة الطوابير والحجوزات وتنظيم انتظار الزبائن بسهولة.',
 
-        theme_color: '#3989EC',
+        theme_color: '#F1EBFD',
         background_color: '#ffffff',
 
         display: 'standalone',
 
-        start_url: '/',
-        scope: '/',
+        start_url: '/shopAdmin',
+        scope: '/shopAdmin',
 
         icons: [
             {

@@ -18,10 +18,18 @@
     <link rel="canonical" href="https://spotlly.com/">
 
     <link
-        rel="icon"
-        type="image/x-icon"
-        href="{{ asset('favicon.ico') }}"
-    >
+    rel="icon"
+    type="image/x-icon"
+    href="{{ asset('favicon.ico') }}"
+>
+
+   <link rel="manifest" href="/build/manifest.webmanifest">
+
+<meta name="theme-color" content="#3989EC">
+
+<link rel="apple-touch-icon" href="/icons/pwa-192x192.png">
+
+
 
     @viteReactRefresh
 
