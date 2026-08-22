@@ -107,7 +107,7 @@ importScripts(
 );
 
 firebase.initializeApp({
-    apiKey: "AIzaSyAUjyNbF__Ki6QVYmpviFP9MEddgZxGgZIQ",
+    apiKey: "AIzaSyAUjyNbF__Ki6QVYmpviFP9MEddgZxGZIQ",
     authDomain: "spotlly.firebaseapp.com",
     projectId: "spotlly",
     storageBucket: "spotlly.firebasestorage.app",

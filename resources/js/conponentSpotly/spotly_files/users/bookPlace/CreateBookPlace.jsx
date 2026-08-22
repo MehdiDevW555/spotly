@@ -99,7 +99,9 @@ function CreateBookPlace(props) {
     let Errors = errors
     console.log(lastTicketNumber)
 
-
+useEffect(() => {
+    console.log("FCM TOKEN CHANGED:", fcmToken);
+}, [fcmToken]);
 
     // console.log(shop)
     // console.log(getServices?.services)
@@ -801,6 +803,7 @@ function CreateBookPlace(props) {
 
                 <Button
                     fullWidth
+                    disabled={!fcmToken}
                     onClick={sendBookPlace}
                     variant="contained"
                     // endIcon={}

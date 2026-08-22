@@ -166,7 +166,8 @@ function NotificationPermissionDialog({
 
             setLoading(false);
 
-            onClose();
+            // onClose();
+            window.location.reload();
 
 
         } catch (error) {

@@ -25,7 +25,7 @@
 
    <link rel="manifest" href="/build/manifest.webmanifest">
 
-<meta name="theme-color" content="#3989EC">
+<meta name="theme-color" content="#F1EBFD">
 
 <link rel="apple-touch-icon" href="/icons/pwa-192x192.png">
 
