@@ -1,31 +1,31 @@
 {
-  "_Close-BfCnbEGb.js": {
-    "file": "assets/Close-BfCnbEGb.js",
+  "_Close-DaIq-2Hj.js": {
+    "file": "assets/Close-DaIq-2Hj.js",
     "name": "Close",
     "imports": [
-      "_Store-BpDAtkMQ.js"
+      "_Store-BhIcN2_i.js"
     ]
   },
-  "_KeyboardDoubleArrowDown-DBwzBRvf.js": {
-    "file": "assets/KeyboardDoubleArrowDown-DBwzBRvf.js",
+  "_KeyboardDoubleArrowDown-DU7AhLzV.js": {
+    "file": "assets/KeyboardDoubleArrowDown-DU7AhLzV.js",
     "name": "KeyboardDoubleArrowDown",
     "imports": [
-      "_Store-BpDAtkMQ.js"
+      "_Store-BhIcN2_i.js"
     ]
   },
-  "_Store-BpDAtkMQ.js": {
-    "file": "assets/Store-BpDAtkMQ.js",
+  "_Store-BhIcN2_i.js": {
+    "file": "assets/Store-BhIcN2_i.js",
     "name": "Store"
   },
   "_SuccessShopSetup-!~{008}~.js": {
     "file": "assets/SuccessShopSetup-CLLlcC51.css",
     "src": "_SuccessShopSetup-!~{008}~.js"
   },
-  "_SuccessShopSetup-DPhMYx3O.js": {
-    "file": "assets/SuccessShopSetup-DPhMYx3O.js",
+  "_SuccessShopSetup-CVxYhpSh.js": {
+    "file": "assets/SuccessShopSetup-CVxYhpSh.js",
     "name": "SuccessShopSetup",
     "imports": [
-      "_Store-BpDAtkMQ.js"
+      "_Store-BhIcN2_i.js"
     ],
     "css": [
       "assets/SuccessShopSetup-CLLlcC51.css"
@@ -127,15 +127,19 @@
     "file": "assets/verifyEmail-CM9W3sWW.png",
     "src": "resources/img/app/verifyEmail.png"
   },
+  "resources/img/users/gide-allow-notification-imag.png": {
+    "file": "assets/gide-allow-notification-imag-Bz-7_bo6.png",
+    "src": "resources/img/users/gide-allow-notification-imag.png"
+  },
   "resources/js/app.jsx": {
-    "file": "assets/app-q86UpOG-.js",
+    "file": "assets/app-DVF1Rp5b.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "imports": [
-      "_Store-BpDAtkMQ.js",
-      "_Close-BfCnbEGb.js",
-      "_KeyboardDoubleArrowDown-DBwzBRvf.js"
+      "_Store-BhIcN2_i.js",
+      "_Close-DaIq-2Hj.js",
+      "_KeyboardDoubleArrowDown-DU7AhLzV.js"
     ],
     "assets": [
       "assets/introImage1-D0p5Ujxr.png",
@@ -148,14 +152,14 @@
     ]
   },
   "resources/js/shopAdmin.jsx": {
-    "file": "assets/shopAdmin-Dv9uKoW3.js",
+    "file": "assets/shopAdmin-CsCoUwPL.js",
     "name": "shopAdmin",
     "src": "resources/js/shopAdmin.jsx",
     "isEntry": true,
     "imports": [
-      "_Store-BpDAtkMQ.js",
-      "_Close-BfCnbEGb.js",
-      "_SuccessShopSetup-DPhMYx3O.js"
+      "_Store-BhIcN2_i.js",
+      "_Close-DaIq-2Hj.js",
+      "_SuccessShopSetup-CVxYhpSh.js"
     ],
     "dynamicImports": [
       "node_modules/workbox-window/build/workbox-window.prod.es5.mjs"
@@ -172,14 +176,17 @@
     ]
   },
   "resources/js/users.jsx": {
-    "file": "assets/users-CUmdzZZn.js",
+    "file": "assets/users-DD76TWgq.js",
     "name": "users",
     "src": "resources/js/users.jsx",
     "isEntry": true,
     "imports": [
-      "_Store-BpDAtkMQ.js",
-      "_SuccessShopSetup-DPhMYx3O.js",
-      "_KeyboardDoubleArrowDown-DBwzBRvf.js"
+      "_Store-BhIcN2_i.js",
+      "_SuccessShopSetup-CVxYhpSh.js",
+      "_KeyboardDoubleArrowDown-DU7AhLzV.js"
+    ],
+    "assets": [
+      "assets/gide-allow-notification-imag-Bz-7_bo6.png"
     ]
   }
 }

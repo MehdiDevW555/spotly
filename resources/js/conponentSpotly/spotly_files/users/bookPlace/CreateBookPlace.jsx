@@ -39,7 +39,9 @@ import API_GET_INFO_SHOP from "../../../api/shopAdmin/infoShop/API_GET_INFO_SHOP
 import { bookPlace_selector, shop_selector } from "../../../../redux/selectors/users/Users_selector";
 import { changeBookPlace } from "../../../../redux/slices/users/Users_slice";
 import API_SEND_BOOK_PLACE from "../../../api/users/API_SEND_BOOK_PLACE";
-
+import { getToken, onMessage } from "firebase/messaging";
+import { messaging } from "../../../../firebase";
+import NotificationPermissionDialog from "../../../dialog/users/NotificationPermissionDialog";
 
 
 
@@ -85,6 +87,18 @@ function CreateBookPlace(props) {
     // const { uuid } = useParams();
 
     const [shopData, setShopData] = useState(null);
+    const [openNotificationDialog, setOpenNotificationDialog] =
+    useState(false);
+const [notificationFromBooking, setNotificationFromBooking] = useState(false);
+    const [currentFcmToken, setCurrentFcmToken] = useState(fcmToken || "");
+
+useEffect(() => {
+    if (fcmToken) {
+        setCurrentFcmToken(fcmToken);
+    }
+}, [fcmToken]);
+
+
     let dispatch = useDispatch()
     let shop = useSelector(shop_selector)
 
@@ -98,6 +112,33 @@ function CreateBookPlace(props) {
     let Loading = loading
     let Errors = errors
     console.log(lastTicketNumber)
+
+//     useEffect(() => {
+
+//     console.log(
+//         "PERMISSION:",
+//         Notification.permission
+//     );
+
+//     if (Notification.permission !== "granted") {
+//         setOpenNotificationDialog(true);
+//     }
+
+// }, []);
+
+useEffect(() => {
+    if (Notification.permission === "granted") {
+        setOpenNotificationDialog(false);
+        return;
+    }
+
+    setNotificationFromBooking(false);
+    setOpenNotificationDialog(true);
+}, []);
+
+
+
+
 
 useEffect(() => {
     console.log("FCM TOKEN CHANGED:", fcmToken);
@@ -124,24 +165,23 @@ useEffect(() => {
     }
 
 
-   let sendBookPlace = () => {
+const sendBookPlace = () => {
+    if (Notification.permission === "granted") {
+        API_SEND_BOOK_PLACE(
+            dispatch,
+            uuid,
+            full_name,
+            phone,
+            ServiceId,
+            tUEFF,
+            currentFcmToken
+        );
 
-    console.log("🔥 FCM TOKEN:", fcmToken);
-
-    if (!fcmToken) {
-        console.log("❌ FCM TOKEN NOT READY");
         return;
     }
 
-    API_SEND_BOOK_PLACE(
-        dispatch,
-        uuid,
-        full_name,
-        phone,
-        ServiceId,
-        tUEFF,
-        fcmToken
-    );
+    setNotificationFromBooking(true);
+    setOpenNotificationDialog(true);
 };
 
 
@@ -164,70 +204,18 @@ useEffect(() => {
 
 
 
-
-            {/* {(Loading === 1 || Loading === 2) && (
-                <Box
-                    sx={{
-                        position: "fixed",
-                        top: 20,
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        zIndex: 9999,
-                        width: {
-                            xs: "80%",
-                            sm: 'fit-content',
-                        },
-                    }}
-                >
-                    <Alert
-                        action={
-                            <IconButton
-                                size="small"
-                                onClick={() =>
-                                    dispatch(
-                                        changeBookPlace({
-                                            loading: -1,
-                                        })
-                                    )
-                                }
-                            >
-                                <CloseIcon sx={{ color: "#fff" }} />
-                            </IconButton>
-                        }
-                        sx={{
-                            background:
-                                Loading === 2
-                                    ? "linear-gradient(135deg,#16a34a,#22c55e)"
-                                    : "linear-gradient(135deg,#dc2626,#ef4444)",
-
-                            color: "#fff",
-                            borderRadius: 4,
-                            fontWeight: 700,
-                            boxShadow:
-                                Loading === 2
-                                    ? "0 12px 35px rgba(34,197,94,.35)"
-                                    : "0 12px 35px rgba(239,68,68,.35)",
-
-                            "& .MuiAlert-icon": {
-                                color: "#fff",
-                            },
-
-                            "& .MuiAlert-message": {
-                                width: "100%",
-                                textAlign: "center",
-                            },
-
-                            "& .MuiIconButton-root": {
-                                color: "#fff",
-                            },
-                        }}
-                    >
-                        {Loading === 2
-                            ? "تم حجز دورك بنجاح 🎉"
-                            : "حدث خطأ أثناء حجز الدور"}
-                    </Alert>
-                </Box>
-            )} */}
+      <NotificationPermissionDialog
+    open={openNotificationDialog}
+    uuid={uuid}
+    fromBooking={notificationFromBooking}
+    onTokenReady={(token) => {
+        setCurrentFcmToken(token);
+    }}
+    onClose={() => {
+        setOpenNotificationDialog(false);
+        setNotificationFromBooking(false);
+    }}
+/>
 
 
 
@@ -803,7 +791,6 @@ useEffect(() => {
 
                 <Button
                     fullWidth
-                    disabled={!fcmToken}
                     onClick={sendBookPlace}
                     variant="contained"
                     // endIcon={}

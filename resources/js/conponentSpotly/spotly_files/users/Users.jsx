@@ -34,7 +34,7 @@ import Loading from "../../otherFiles/loading/Loading";
 import { getToken, onMessage } from "firebase/messaging";
 import { messaging } from "../../../firebase";
 
-import NotificationPermissionDialog from "../../dialog/users/NotificationPermissionDialog";
+// import NotificationPermissionDialog from "../../dialog/users/NotificationPermissionDialog";
 
 
 function Users() {
@@ -48,8 +48,8 @@ function Users() {
     const [soundReady, setSoundReady] = useState(false);
     const [alarmAudio, setAlarmAudio] = useState(null);
 
-    const [openNotificationDialog, setOpenNotificationDialog] =
-        useState(false);
+    // const [openNotificationDialog, setOpenNotificationDialog] =
+    //     useState(false);
 
 
     const ticketStatus = useSelector(ticketStatus_selector);
@@ -94,15 +94,15 @@ function Users() {
     // Notification Dialog
     // -------------------------------------------------------------------------
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (Notification.permission === "granted") {
-            return;
-        }
+    //     if (Notification.permission === "granted") {
+    //         return;
+    //     }
 
-        setOpenNotificationDialog(true);
+    //     setOpenNotificationDialog(true);
 
-    }, []);
+    // }, []);
 
 
 
@@ -657,13 +657,13 @@ function Users() {
                     setOpenNotificationDialog(false)
                 }
             /> */}
-            <NotificationPermissionDialog
+            {/* <NotificationPermissionDialog
                 open={openNotificationDialog}
                 uuid={uuid}
                 onClose={() =>
                     setOpenNotificationDialog(false)
                 }
-            />
+            /> */}
 
 
             {

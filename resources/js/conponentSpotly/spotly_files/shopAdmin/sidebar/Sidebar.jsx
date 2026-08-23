@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Typography,
@@ -34,8 +35,8 @@ import Title from "./title/Title";
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import TvIcon from '@mui/icons-material/Tv';
 import DvrIcon from '@mui/icons-material/Dvr';
-
-
+import DownloadIcon from "@mui/icons-material/Download";
+import InstallMobileIcon from '@mui/icons-material/InstallMobile';
 
 
 
@@ -53,6 +54,78 @@ export default function Sidebar(props) {
     let tUEFF = createService?.TUEFF
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+
+    const [deferredPrompt, setDeferredPrompt] = useState(null);
+    const [isInstalled, setIsInstalled] = useState(false);
+
+    useEffect(() => {
+
+        const handleBeforeInstallPrompt = (event) => {
+            event.preventDefault();
+            setDeferredPrompt(event);
+        };
+
+        const handleAppInstalled = () => {
+            setDeferredPrompt(null);
+            setIsInstalled(true);
+        };
+
+        window.addEventListener(
+            "beforeinstallprompt",
+            handleBeforeInstallPrompt
+        );
+
+        window.addEventListener(
+            "appinstalled",
+            handleAppInstalled
+        );
+
+        if (
+            window.matchMedia("(display-mode: standalone)").matches ||
+            window.navigator.standalone === true
+        ) {
+            setIsInstalled(true);
+        }
+
+        return () => {
+
+            window.removeEventListener(
+                "beforeinstallprompt",
+                handleBeforeInstallPrompt
+            );
+
+            window.removeEventListener(
+                "appinstalled",
+                handleAppInstalled
+            );
+
+        };
+
+    }, []);
+
+
+
+    const handleInstallApp = async () => {
+        if (!deferredPrompt) {
+            return;
+        }
+
+        deferredPrompt.prompt();
+
+        const { outcome } = await deferredPrompt.userChoice;
+
+        if (outcome === "accepted") {
+            setDeferredPrompt(null);
+        }
+    };
+
+
+
+
+
+
+
     let openPageDashboard = () => {
         dispatch(ChangeCurrentPage('Dashboard'))
     }
@@ -261,7 +334,7 @@ export default function Sidebar(props) {
                             },
                         }}
                     >
-                        <ContentCutIcon  sx={{transform: "rotate(-90deg)"}} />
+                        <ContentCutIcon sx={{ transform: "rotate(-90deg)" }} />
                         <Typography>
                             الخدمات
                         </Typography>
@@ -347,6 +420,35 @@ export default function Sidebar(props) {
                             الاشتراك
                         </Typography>
                     </Box>
+
+
+
+                    <Box
+                        onClick={handleInstallApp}
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 2,
+                            px: 2,
+                            py: 1,
+                            borderRadius: 2,
+                            cursor: "pointer",
+                            bgcolor: "#dae2fd",
+                            color: "#004ac6",
+                            transition: "0.2s",
+                            "&:hover": {
+                                bgcolor: "#cbd7ff",
+                            },
+                        }}
+                    >
+                        <InstallMobileIcon />
+                        <Typography>
+                            تثبيت التطبيق
+                        </Typography>
+                    </Box>
+
+
+
 
                     <Box
                         onClick={() => {
@@ -593,7 +695,7 @@ export default function Sidebar(props) {
                                 },
                             }}
                         >
-                            <ContentCutIcon  sx={{transform: "rotate(-90deg)"}} />
+                            <ContentCutIcon sx={{ transform: "rotate(-90deg)" }} />
                             <Typography>
                                 الخدمات
                             </Typography>
@@ -680,6 +782,30 @@ export default function Sidebar(props) {
                             <CreditCardIcon />
                             <Typography>
                                 الاشتراك
+                            </Typography>
+                        </Box>
+
+                        <Box
+                            onClick={handleInstallApp}
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 2,
+                                px: 2,
+                                py: 1,
+                                borderRadius: 2,
+                                cursor: "pointer",
+                                bgcolor: "#dae2fd",
+                                color: "#004ac6",
+                                transition: "0.2s",
+                                "&:hover": {
+                                    bgcolor: "#cbd7ff",
+                                },
+                            }}
+                        >
+                            <InstallMobileIcon />
+                            <Typography>
+                                تثبيت التطبيق
                             </Typography>
                         </Box>
 
