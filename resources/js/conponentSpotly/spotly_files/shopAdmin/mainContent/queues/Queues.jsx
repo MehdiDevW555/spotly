@@ -215,7 +215,7 @@ function Queues(props) {
                         </Button>
                     </Zoom>
 
-                  { services?.length < maxServices && <Zoom
+                  {getService?.services?.length < maxServices && <Zoom
                         unmountOnExit
 
                         in={openFab}

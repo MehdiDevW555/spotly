@@ -72,6 +72,11 @@ function MobileSidebar(props) {
         dispatch(changeOpenFeb())
     }
 
+    console.log("services:", services);
+console.log("services.length:", services?.length);
+console.log("maxServices:", maxServices);
+console.log("condition:", services?.length < maxServices);
+
     return (
         <Box
             sx={{
@@ -187,7 +192,7 @@ function MobileSidebar(props) {
                     </Grow>
 
 
-                 {services?.length < maxServices &&  <Grow
+                 {getService?.services?.length < maxServices &&  <Grow
                         in={openFeb}
                         timeout={300}
                         style={{
