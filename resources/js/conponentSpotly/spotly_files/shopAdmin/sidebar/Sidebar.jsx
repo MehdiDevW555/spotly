@@ -810,7 +810,8 @@ export default function Sidebar(props) {
                                 py: 1,
                                 borderRadius: 2,
                                 cursor: "pointer",
-                                bgcolor: "#dae2fd",
+                                // bgcolor: "#dae2fd",
+                                color: "#004ac6",
                                 transition: "0.2s",
                                 "&:hover": {
                                     bgcolor: "#cbd7ff",
