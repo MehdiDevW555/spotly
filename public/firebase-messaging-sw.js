@@ -153,42 +153,29 @@ messaging.onBackgroundMessage((payload) => {
     // Notification options
     // ==================================================
 
-    const options = {
+    const notificationIcon =
+    "https://spotlly.com/images/notification-icon.png";
 
-        body: body,
+const options = {
+    body: body,
+    icon: icon,
+    badge: notificationIcon,
 
-        icon: icon,
+    tag: data.ticket_uuid || "spotlly-ticket",
 
-        badge: icon,
+    renotify: true,
+    requireInteraction: true,
 
-        tag:
-            data.ticket_uuid ||
-            "spotlly-ticket",
+    vibrate: [200, 100, 200],
 
-        renotify: true,
+    data: {
+        url: url,
+        ticketId: data.ticket_id || null,
+        ticketUuid: data.ticket_uuid || null,
+        status: data.status || null,
+    },
+};
 
-        requireInteraction: true,
-
-        vibrate: [
-            200,
-            100,
-            200
-        ],
-
-        data: {
-
-            url: url,
-
-            ticketId:
-                data.ticket_id || null,
-
-            ticketUuid:
-                data.ticket_uuid || null,
-
-            status:
-                data.status || null,
-        },
-    };
 
 
     // ==================================================
