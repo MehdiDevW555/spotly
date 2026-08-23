@@ -441,7 +441,7 @@ export default function Sidebar(props) {
                     <Box
                         onClick={handleInstallApp}
                         sx={{
-                            display: "flex",
+                            display: "none",
                             alignItems: "center",
                             gap: 2,
                             px: 2,
@@ -803,7 +803,7 @@ export default function Sidebar(props) {
                         <Box
                             onClick={handleInstallApp}
                             sx={{
-                                display: "flex",
+                                display: "none",
                                 alignItems: "center",
                                 gap: 2,
                                 px: 2,

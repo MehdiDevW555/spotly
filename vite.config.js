@@ -91,49 +91,13 @@ export default defineConfig({
 
         react(),
 
-//      VitePWA({
-//     registerType: 'autoUpdate',
-
-//     manifest: {
-//         name: 'Spotlly',
-//         short_name: 'Spotlly',
-//         description: 'Spotlly هو نظام ذكي لإدارة الطوابير والحجوزات وتنظيم انتظار الزبائن بسهولة.',
-
-//         theme_color: '#F1EBFD',
-//         background_color: '#ffffff',
-
-//         display: 'standalone',
-
-//         start_url: '/shopAdmin',
-//         scope: '/shopAdmin',
-
-//         icons: [
-//             {
-//                 src: '/icons/pwa-192x192.png',
-//                 sizes: '192x192',
-//                 type: 'image/png',
-//             },
-//             {
-//                 src: '/icons/pwa-512x512.png',
-//                 sizes: '512x512',
-//                 type: 'image/png',
-//             },
-//         ],
-//     },
-// }),
-
-
-VitePWA({
+     VitePWA({
     registerType: 'autoUpdate',
-    injectRegister: 'auto',
-
-    filename: 'sw.js',
 
     manifest: {
         name: 'Spotlly',
         short_name: 'Spotlly',
-        description:
-            'Spotlly هو نظام ذكي لإدارة الطوابير والحجوزات وتنظيم انتظار الزبائن بسهولة.',
+        description: 'Spotlly هو نظام ذكي لإدارة الطوابير والحجوزات وتنظيم انتظار الزبائن بسهولة.',
 
         theme_color: '#F1EBFD',
         background_color: '#ffffff',
@@ -141,7 +105,7 @@ VitePWA({
         display: 'standalone',
 
         start_url: '/shopAdmin',
-        scope: '/',
+        scope: '/shopAdmin',
 
         icons: [
             {
@@ -156,11 +120,10 @@ VitePWA({
             },
         ],
     },
-
-    workbox: {
-        navigateFallback: '/shopAdmin',
-    },
 }),
+
+
+
 
 
     ],
