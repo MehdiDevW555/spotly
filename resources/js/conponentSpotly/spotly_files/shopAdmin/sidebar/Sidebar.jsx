@@ -62,11 +62,19 @@ export default function Sidebar(props) {
     useEffect(() => {
 
         const handleBeforeInstallPrompt = (event) => {
+
+            console.log("🔥 BEFORE INSTALL PROMPT:", event);
+
             event.preventDefault();
+
             setDeferredPrompt(event);
+            setIsInstalled(false);
         };
 
         const handleAppInstalled = () => {
+
+            console.log("🔥 APP INSTALLED");
+
             setDeferredPrompt(null);
             setIsInstalled(true);
         };
@@ -81,10 +89,11 @@ export default function Sidebar(props) {
             handleAppInstalled
         );
 
-        if (
+        const standalone =
             window.matchMedia("(display-mode: standalone)").matches ||
-            window.navigator.standalone === true
-        ) {
+            window.navigator.standalone === true;
+
+        if (standalone) {
             setIsInstalled(true);
         }
 
@@ -99,27 +108,33 @@ export default function Sidebar(props) {
                 "appinstalled",
                 handleAppInstalled
             );
-
         };
 
     }, []);
 
-
-
     const handleInstallApp = async () => {
+
         if (!deferredPrompt) {
+
+            console.log(
+                "❌ Install prompt غير متوفر"
+            );
+
             return;
         }
 
         deferredPrompt.prompt();
 
-        const { outcome } = await deferredPrompt.userChoice;
+        const { outcome } =
+            await deferredPrompt.userChoice;
 
-        if (outcome === "accepted") {
-            setDeferredPrompt(null);
-        }
+        console.log(
+            "🔥 INSTALL RESULT:",
+            outcome
+        );
+
+        setDeferredPrompt(null);
     };
-
 
 
 
@@ -433,7 +448,7 @@ export default function Sidebar(props) {
                             py: 1,
                             borderRadius: 2,
                             cursor: "pointer",
-                            bgcolor: "#dae2fd",
+                            // bgcolor: "#dae2fd",
                             color: "#004ac6",
                             transition: "0.2s",
                             "&:hover": {
@@ -796,7 +811,6 @@ export default function Sidebar(props) {
                                 borderRadius: 2,
                                 cursor: "pointer",
                                 bgcolor: "#dae2fd",
-                                color: "#004ac6",
                                 transition: "0.2s",
                                 "&:hover": {
                                     bgcolor: "#cbd7ff",
