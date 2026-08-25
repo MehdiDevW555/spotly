@@ -17,7 +17,7 @@ import Loading from '../../../otherFiles/loading/Loading'
 import Subscriptions from './subscriptions/Subscriptions'
 import API_GET_CURRENT_TICKET from '../../../api/shopAdmin/queue/API_GET_CURRENT_TICKET'
 import API_GET_ALL_TICKET from '../../../api/shopAdmin/queue/API_GET_ALL_TICKET'
-import { ChangeToggleDialogCreateTicket } from '../../../../redux/slices/shopAdmin/ShopAdmin_slice'
+import { changeBookPlaceManually, ChangeToggleDialogCreateTicket } from '../../../../redux/slices/shopAdmin/ShopAdmin_slice'
 import CreateTicket from '../../../dialog/shopAdmin/mainContent/queues/CreateTicket'
 import API_GET_QUEUE_STATUS from '../../../api/shopAdmin/queue/API_GET_QUEUE_STATUS'
 
@@ -71,6 +71,7 @@ let toggleUpdateQueueStatus = useSelector(toggleUpdateQueueStatus_selector)
     console.log(idShop)
     let openDialogCreateTicket = () => {
         dispatch(ChangeToggleDialogCreateTicket())
+        // dispatch(changeBookPlaceManually({full_name: '', phone: '', service_id: '', loading: 0, }))
     }
 
     return (

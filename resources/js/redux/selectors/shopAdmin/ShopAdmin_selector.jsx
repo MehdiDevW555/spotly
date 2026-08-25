@@ -30,7 +30,7 @@ let getSubscription_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?
 let getQueueStatus_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.getQueueStatus
 let dataQueueStatus_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.dataQueueStatus
 let toggleUpdateQueueStatus_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.toggleUpdateQueueStatus
-
+let bookPlaceManually_selector = (state)=>state.shopAdmin?.dashboard?.mainContent?.bookPlaceManually
 
 // startService dataQueueStatus
 
@@ -61,5 +61,6 @@ export {
     getQueueStatus_selector,
     dataQueueStatus_selector,
     toggleUpdateQueueStatus_selector,
-    recallUser_selector
+    recallUser_selector,
+    bookPlaceManually_selector
 }

@@ -771,7 +771,7 @@ linear-gradient(
 
                     {/* WAITING TIME */}
 
-                    <Paper
+                    {/* <Paper
                         elevation={0}
                         sx={{
                             flex: 1,
@@ -871,7 +871,7 @@ linear-gradient(
                             }}
                         />
 
-                    </Paper>
+                    </Paper> */}
 
                 </Box>
 

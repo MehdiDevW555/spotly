@@ -40,6 +40,10 @@ function API_TICKET_STATUS(
                     `ticket_uuid_${shopUuid}`
                 )
 
+                localStorage.removeItem(
+                    `ticket_id_${shopUuid}`
+                )
+
                 dispatch(changeTicketStatus({
                     activeTicket: false,
                     status: res.data.status,

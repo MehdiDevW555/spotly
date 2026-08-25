@@ -64,7 +64,7 @@ Route::middleware(['auth:ShopAdmin'])->group(function () {
     Route::get('/shopAdmin', function () {
         return view('shopAdmin');
     });
-
+//
     Route::post('/api/web/getInfoShop', [App\Http\Controllers\api\shopAdmin\infoShop\API_INFO_SHOP::class, "getInfoShop"]);
     Route::post('/api/web/getSubscription', [App\Http\Controllers\api\shopAdmin\subscription\API_SEND_SUBSCRIPTION::class, "getSubscription"]);
     Route::post('/api/web/sendSetupInfoShop', [App\Http\Controllers\api\shopAdmin\infoShop\API_INFO_SHOP::class, "sendSetupInfoShop"]);
@@ -78,6 +78,7 @@ Route::middleware(['auth:ShopAdmin'])->group(function () {
 
     Route::post('/api/web/updateQueueStatus', [App\Http\Controllers\api\shopAdmin\queue\API_UPDATE_QUEUE_STATUS::class, "updateQueueStatus"]);
     Route::post('/api/web/getQueueStatus', [App\Http\Controllers\api\shopAdmin\queue\API_GET_QUEUE_STATUS::class, "getQueueStatus"]);
+    Route::post('/api/web/createBookPlaceManually', [App\Http\Controllers\api\shopAdmin\dialogs\API_CREATE_BOOK_PLACE_MANUALLY::class, "createBookPlaceManually"]);
 
 
     // getQueueStatus

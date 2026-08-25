@@ -104,7 +104,7 @@ export default function Navbar(props) {
                         height: 80,
                         display: {
                             xs: "none",
-                            lg: "flex",
+                            md: "flex",
                         },
                     }}
                 />
@@ -115,9 +115,10 @@ export default function Navbar(props) {
             <Box
                 sx={{
                     display: {
-                        xs: "flex",
-                        sm: "none",
-                    },
+                             xs: "flex",
+                            sm: "flex",
+                            md: "none",
+                        },
                     alignItems: "center",
                     justifyContent: "space-between",
                     gap: 1,
@@ -142,8 +143,9 @@ export default function Navbar(props) {
 
 
                         display: {
-                            xs: "flex",
-                            lg: "none",
+                             xs: "flex",
+                            sm: "flex",
+                            md: "none",
                         },
                     }}
                 >
@@ -196,7 +198,7 @@ export default function Navbar(props) {
                     height: 65,
                     display: {
                         xs: "flex",
-                        lg: "none",
+                        md: "none",
                     },
                 }}
             />
@@ -253,7 +255,7 @@ export default function Navbar(props) {
 
                         display: {
                             xs: "none",
-                            sm: "flex",
+                            md: "flex",
                         },
                     }}
                 >

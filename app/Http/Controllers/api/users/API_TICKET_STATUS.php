@@ -24,6 +24,15 @@ class API_TICKET_STATUS extends Controller
             ]);
         }
 
+        if (
+            $ticket->created_at->toDateString()
+            !== now()->toDateString()
+        ) {
+            return response()->json([
+                'active' => false,
+                'status' => 'expired'
+            ]);
+        }
 
 
         if (
@@ -40,7 +49,7 @@ class API_TICKET_STATUS extends Controller
                 ->where('ticket_number', '<', $ticket->ticket_number)
                 ->count();
 
-           
+
             return response()->json([
                 'active' => true,
                 'status' => $ticket->status,

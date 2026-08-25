@@ -76,7 +76,7 @@ const fieldStyle = {
 
 
 function CreateBookPlace(props) {
-    let { lastTicketNumber, waitingCount, tUEFF, uuid, ticketNumber ,fcmToken} = props
+    let { lastTicketNumber, waitingCount, tUEFF, uuid, ticketNumber, fcmToken } = props
     let scrollToBottom = () => {
         window.scrollTo({
             top: document.body.scrollHeight,
@@ -88,15 +88,15 @@ function CreateBookPlace(props) {
 
     const [shopData, setShopData] = useState(null);
     const [openNotificationDialog, setOpenNotificationDialog] =
-    useState(false);
-const [notificationFromBooking, setNotificationFromBooking] = useState(false);
+        useState(false);
+    const [notificationFromBooking, setNotificationFromBooking] = useState(false);
     const [currentFcmToken, setCurrentFcmToken] = useState(fcmToken || "");
 
-useEffect(() => {
-    if (fcmToken) {
-        setCurrentFcmToken(fcmToken);
-    }
-}, [fcmToken]);
+    useEffect(() => {
+        if (fcmToken) {
+            setCurrentFcmToken(fcmToken);
+        }
+    }, [fcmToken]);
 
 
     let dispatch = useDispatch()
@@ -111,38 +111,38 @@ useEffect(() => {
     let ServiceId = service_id
     let Loading = loading
     let Errors = errors
-    console.log(lastTicketNumber)
+    console.log(bookPlace)
 
-//     useEffect(() => {
+    //     useEffect(() => {
 
-//     console.log(
-//         "PERMISSION:",
-//         Notification.permission
-//     );
+    //     console.log(
+    //         "PERMISSION:",
+    //         Notification.permission
+    //     );
 
-//     if (Notification.permission !== "granted") {
-//         setOpenNotificationDialog(true);
-//     }
+    //     if (Notification.permission !== "granted") {
+    //         setOpenNotificationDialog(true);
+    //     }
 
-// }, []);
+    // }, []);
 
-useEffect(() => {
-    if (Notification.permission === "granted") {
-        setOpenNotificationDialog(false);
-        return;
-    }
+    useEffect(() => {
+        if (Notification.permission === "granted") {
+            setOpenNotificationDialog(false);
+            return;
+        }
 
-    setNotificationFromBooking(false);
-    setOpenNotificationDialog(true);
-}, []);
-
-
+        setNotificationFromBooking(false);
+        setOpenNotificationDialog(true);
+    }, []);
 
 
 
-useEffect(() => {
-    console.log("FCM TOKEN CHANGED:", fcmToken);
-}, [fcmToken]);
+
+
+    useEffect(() => {
+        console.log("FCM TOKEN CHANGED:", fcmToken);
+    }, [fcmToken]);
 
     // console.log(shop)
     // console.log(getServices?.services)
@@ -165,24 +165,24 @@ useEffect(() => {
     }
 
 
-const sendBookPlace = () => {
-    if (Notification.permission === "granted") {
-        API_SEND_BOOK_PLACE(
-            dispatch,
-            uuid,
-            full_name,
-            phone,
-            ServiceId,
-            tUEFF,
-            currentFcmToken
-        );
+    const sendBookPlace = () => {
+        if (Notification.permission === "granted") {
+            API_SEND_BOOK_PLACE(
+                dispatch,
+                uuid,
+                full_name,
+                phone,
+                ServiceId,
+                tUEFF,
+                currentFcmToken
+            );
 
-        return;
-    }
+            return;
+        }
 
-    setNotificationFromBooking(true);
-    setOpenNotificationDialog(true);
-};
+        setNotificationFromBooking(true);
+        setOpenNotificationDialog(true);
+    };
 
 
     return (
@@ -204,18 +204,18 @@ const sendBookPlace = () => {
 
 
 
-      <NotificationPermissionDialog
-    open={openNotificationDialog}
-    uuid={uuid}
-    fromBooking={notificationFromBooking}
-    onTokenReady={(token) => {
-        setCurrentFcmToken(token);
-    }}
-    onClose={() => {
-        setOpenNotificationDialog(false);
-        setNotificationFromBooking(false);
-    }}
-/>
+            <NotificationPermissionDialog
+                open={openNotificationDialog}
+                uuid={uuid}
+                fromBooking={notificationFromBooking}
+                onTokenReady={(token) => {
+                    setCurrentFcmToken(token);
+                }}
+                onClose={() => {
+                    setOpenNotificationDialog(false);
+                    setNotificationFromBooking(false);
+                }}
+            />
 
 
 
@@ -664,6 +664,10 @@ const sendBookPlace = () => {
                 />
 
                 <TextField
+                    type="phone"
+                    inputProps={{
+                        maxLength: 10,
+                    }}
                     fullWidth
                     value={Phone}
                     onChange={handelChangeBookPlace('phone')}
@@ -721,20 +725,23 @@ const sendBookPlace = () => {
 
                                     color: "#fff",
 
-                                    border: selected
-                                        ? "2px solid #A78BFA"
-                                        : "1px solid rgba(255,255,255,.15)",
+                                    border: Errors?.service_id
+                                        ? "2px solid #ef4444"
+                                        : selected
+                                            ? "2px solid #A78BFA"
+                                            : "1px solid rgba(255,255,255,.15)",
 
-                                    boxShadow: selected
-                                        ? "0 0 25px rgba(124,58,237,.45)"
-                                        : "none",
+                                    boxShadow: Errors?.service_id
+                                        ? "0 0 20px rgba(239,68,68,.25)"
+                                        : selected
+                                            ? "0 0 25px rgba(124,58,237,.45)"
+                                            : "none",
 
                                     transform: selected
                                         ? "translateY(-4px)"
                                         : "translateY(0)",
 
                                     transition: "all .25s ease",
-
                                     position: "relative",
 
                                     "&:hover": {
@@ -782,7 +789,7 @@ const sendBookPlace = () => {
                         sx={{
                             color: "#f44336",
                             fontSize: 12,
-                            mt: 1
+                            mt: -1
                         }}
                     >
                         {Errors.service_id[0]}

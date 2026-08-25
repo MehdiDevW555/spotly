@@ -413,7 +413,7 @@ export default function InfoShopSetup(props) {
                             }}
                         >
                             <TextField
-                                placeholder="ابحث عن موقع المحل"
+                                placeholder="ابحث عن موقع المحل، مثل: حامة بوزيان، قسنطينة"
                                 fullWidth
                                 value={searchValue}
                                 sx={fieldStyle}
@@ -577,7 +577,6 @@ export default function InfoShopSetup(props) {
                             <MenuItem value="doctor">طبيب</MenuItem>
                         </TextField>
 
-
                     </Box>
 
                     {/* Actions */}
@@ -652,7 +651,7 @@ const fieldStyle = {
     "& .MuiOutlinedInput-root": {
         borderRadius: "14px",
         backdropFilter: "blur(10px)",
-        // background: "rgba(210, 233, 255, 0.49)",
+        // background: "rgba(255, 255, 255, 0.04)",
         color: "#ffffff",
 
 

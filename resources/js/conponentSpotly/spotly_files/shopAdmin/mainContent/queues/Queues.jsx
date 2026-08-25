@@ -173,7 +173,7 @@ function Queues(props) {
 
                 <Box
                     sx={{
-                        display: { xs: "none", md: "flex" },
+                        display: { xs: "none", sm: "flex" },
                         position: "fixed",
                         bottom: { xs: 50, md: 50 },
                         left: { xs: 20, md: 40 },

@@ -104,7 +104,7 @@ export default function WelcomeShopSetup() {
             <Box
                 sx={{
                     position: "absolute",
-                    top: 150,
+                    top: 120,
                     left: "50%",
                     transform: "translateX(-50%)",
                     display: "flex",
@@ -137,7 +137,7 @@ export default function WelcomeShopSetup() {
                         borderRadius: { xs: 3, md: 4 },
                         width: {
                             xs: 200,
-                            sm: 80,
+                            sm: 150,
                             md: 200,
                         },
                         height: {

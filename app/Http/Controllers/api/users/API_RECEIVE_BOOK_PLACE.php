@@ -5,12 +5,12 @@ namespace App\Http\Controllers\api\users;
 use App\Http\Controllers\Controller;
 use App\Events\TicketCreated;
 use App\Models\customerDevices\CustomerDevices;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Models\shopAdmin\ShopAdmin;
 use App\Models\customers\Customers;
 use App\Models\tickets\Tickets;
 use App\Models\services\Services;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class API_RECEIVE_BOOK_PLACE extends Controller
@@ -20,21 +20,21 @@ class API_RECEIVE_BOOK_PLACE extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'uuid'      => 'required|string',
-                'full_name' => 'required|string|max:255',
-                'phone'     => 'required|string|size:10',
-                'serviceId' => 'nullable|integer',
-                'fcm_token' => 'nullable|string',
+                'uuid'       => 'required|string',
+                'full_name'  => 'required|string|max:255',
+                'phone'      => 'required|string|size:10',
+                'serviceId'  => 'nullable|integer',
+                'fcm_token'  => 'nullable|string',
             ],
             [
-                'uuid.required'      => 'معرف المحل مطلوب.',
-                'uuid.string'        => 'معرف المحل غير صالح.',
-                'full_name.required' => 'الاسم الكامل مطلوب.',
-                'full_name.string'   => 'الاسم الكامل يجب أن يكون نصاً.',
-                'full_name.max'      => 'الاسم الكامل لا يجب أن يتجاوز 255 حرفاً.',
-                'phone.required'     => 'رقم الهاتف مطلوب.',
-                'phone.string'       => 'رقم الهاتف غير صالح.',
-                'phone.size'         => 'رقم الهاتف يجب أن يتكون من 10 أرقام.',
+                'uuid.required'       => 'معرف المحل مطلوب.',
+                'uuid.string'         => 'معرف المحل غير صالح.',
+                'full_name.required'  => 'الاسم الكامل مطلوب.',
+                'full_name.string'    => 'الاسم الكامل يجب أن يكون نصاً.',
+                'full_name.max'       => 'الاسم الكامل لا يجب أن يتجاوز 255 حرفاً.',
+                'phone.required'      => 'رقم الهاتف مطلوب.',
+                'phone.string'        => 'رقم الهاتف غير صالح.',
+                'phone.size'          => 'رقم الهاتف يجب أن يتكون من 10 أرقام.',
             ]
         );
 
@@ -46,6 +46,7 @@ class API_RECEIVE_BOOK_PLACE extends Controller
             ], 422);
         }
 
+        // البحث عن المحل
         $shop = ShopAdmin::where('uuid', $request->uuid)->first();
 
         if (!$shop) {
@@ -55,6 +56,10 @@ class API_RECEIVE_BOOK_PLACE extends Controller
             ], 404);
         }
 
+        // ============================================================
+        // التحقق من الخدمات
+        // ============================================================
+
         $hasServices = Services::where('shop_id', $shop->id)
             ->where('status', 'active')
             ->exists();
@@ -62,13 +67,21 @@ class API_RECEIVE_BOOK_PLACE extends Controller
         $service = null;
 
         if ($hasServices) {
-            if (!$request->serviceId) {
+
+            // إذا كان المحل لديه خدمات، يجب اختيار خدمة
+            if (!$request->filled('serviceId')) {
                 return response()->json([
                     'success' => false,
                     'message' => 'يرجى اختيار الخدمة.',
+                    'errors' => [
+                        'serviceId' => [
+                            'الخدمة مطلوبة، يرجى اختيار الخدمة.'
+                        ]
+                    ]
                 ], 422);
             }
 
+            // التأكد أن الخدمة موجودة وتابعة لهذا المحل وفعالة
             $service = Services::where('id', $request->serviceId)
                 ->where('shop_id', $shop->id)
                 ->where('status', 'active')
@@ -77,15 +90,23 @@ class API_RECEIVE_BOOK_PLACE extends Controller
             if (!$service) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Service not found',
+                    'message' => 'الخدمة المحددة غير موجودة أو غير متاحة.',
                 ], 404);
             }
         }
+
+        // ============================================================
+        // إنشاء / الحصول على العميل
+        // ============================================================
 
         $customer = Customers::firstOrCreate(
             ['phone' => $request->phone],
             ['name' => $request->full_name]
         );
+
+        // ============================================================
+        // رقم التذكرة
+        // ============================================================
 
         $lastTicket = Tickets::where('shop_id', $shop->id)
             ->whereDate('created_at', today())
@@ -93,49 +114,68 @@ class API_RECEIVE_BOOK_PLACE extends Controller
 
         $ticketNumber = $lastTicket ? $lastTicket + 1 : 1;
 
+        // ============================================================
+        // إنشاء التذكرة
+        // ============================================================
+
         $ticket = Tickets::create([
-            'ticket_uuid'   => Str::uuid(),
-            'shop_id'       => $shop->id,
-            'service_id'    => $service?->id,
-            'customer_id'   => $customer->id,
-            'ticket_number' => $ticketNumber,
-            'status'        => 'waiting',
+            'ticket_uuid'       => Str::uuid(),
+            'shop_id'           => $shop->id,
+            'service_id'        => $service?->id,
+            'customer_id'       => $customer->id,
+            'ticket_number'     => $ticketNumber,
+            'status'            => 'waiting',
             'device_of_customer' => json_encode([
-                'ip' => $request->ip(),
+                'ip'         => $request->ip(),
                 'user_agent' => $request->userAgent(),
             ]),
         ]);
 
         // ============================================================
-        // ✅ الحل: حفظ FCM Token مع منع التكرار
+        // حفظ FCM Token
         // ============================================================
+
         if ($request->filled('fcm_token')) {
+
             try {
-                // البحث عن جهاز موجود بنفس التذكرة
-                $device = CustomerDevices::where('ticket_id', $ticket->id)->first();
+
+                $device = CustomerDevices::where(
+                    'ticket_id',
+                    $ticket->id
+                )->first();
 
                 if ($device) {
-                    // تحديث الـ Token إذا كان موجوداً
+
                     $device->update([
-                        'fcm_token' => $request->fcm_token,
+                        'fcm_token'           => $request->fcm_token,
                         'near_turn_last_count' => null,
                     ]);
+
                 } else {
-                    // إنشاء جديد إذا لم يكن موجوداً
-                    $device = CustomerDevices::create([
-                        'ticket_id' => $ticket->id,
-                        'fcm_token' => $request->fcm_token,
-                        'near_turn_notified' => false,
+
+                    CustomerDevices::create([
+                        'ticket_id'            => $ticket->id,
+                        'fcm_token'            => $request->fcm_token,
+                        'near_turn_notified'   => false,
                         'near_turn_last_count' => null,
                     ]);
                 }
 
             } catch (\Throwable $e) {
-                
+
+                // لا نوقف إنشاء التذكرة إذا فشل حفظ FCM
             }
         }
 
+        // ============================================================
+        // Broadcast إلى ShopAdmin
+        // ============================================================
+
         event(new TicketCreated($ticket));
+
+        // ============================================================
+        // Response
+        // ============================================================
 
         return response()->json([
             'success'       => true,
